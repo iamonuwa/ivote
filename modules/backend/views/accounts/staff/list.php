@@ -66,7 +66,9 @@
                         <td>{{ user.phone }}</td>
                         <!-- <td>{{ user.gender }}</td> -->
                         <td>{{ user.occupation }}</td>
-                        <td> <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(user)" title="Modify Account" ><span class="glyphicon glyphicon-edit"></span></button> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(user.id)" name="unblock" title="Re-activate Account"><span class="fa fa-lock"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(user)" name="print" title="Print User Details"><span class="glyphicon glyphicon-print"></span></button></td>
+                        <td> <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(user)" title="Modify Account" ><span class="glyphicon glyphicon-edit"></span></button> 
+                        <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(user.id)" name="unblock" title="Deactivate Account"><span class="fa fa-lock"></span></button>
+                         <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(user)" name="print" title="Print User Details"><span class="glyphicon glyphicon-print"></span></button></td>
                       </tr>
                       </tbody>
                   </table></div></div>
@@ -113,27 +115,28 @@
           </div>
           <div class="col-xs-4">
             <label for="surname" class="control-label">Surname</label>
-            <input type="text" ng-model="surname" class="form-control" id="surname" ng-required>
+            <input type="text" ng-model="surname" class="form-control" id="surname" placeholder="john" required>
           </div>
           <div class="col-xs-4">
             <label for="firstame" class="control-label">Firstname</label>
-            <input type="text" ng-model="firstname" class="form-control" id="firstname" required>
+            <input type="text" ng-model="firstname" class="form-control" id="firstname" placeholder="doe" required>
           </div>
           <div class="col-xs-4">
             <label for="otherame" class="control-label">Othername</label>
-            <input type="text" ng-model="othername" class="form-control" id="othername" required>
+            <input type="text" ng-model="othername" class="form-control" id="othername" placeholder="cow" required>
           </div>
           </div>
           </div>
           <div class="row">
             <div class="form-group">
+            
                 <div class="col-xs-6">
                 <label for="dateofbirth" class="control-label">Date Of Birth</label>
                 <div class="input-group">
                       <div class="input-group-addon">
-                        <i class="fa fa-clock-o"></i>
+                        <i class="fa fa-calender"></i>
                       </div>
-                      <input class="form-control pull-right" id="dateofbirth" ng-model="dateofbirth" type="text" required>
+                      <input class="form-control" id="datemask" type="text" placeholder="dd/mm/yyyy" required>
                     </div>
                 </div>
             <div class="col-md-6">
@@ -153,12 +156,12 @@
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </div>
-                      <input type="text" ng-model="phone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask required>
+                      <input type="text" ng-model="phone" class="form-control" placeholder="08062457326"required>
                     </div>
           </div>
           <div class="col-xs-6">
             <label for="email" class="control-label">Email Address</label>
-            <input type="text" ng-model="email" class="form-control" id="email" required>
+            <input type="text" ng-model="email" class="form-control" id="email" placehoder="johndoe@whatever.com" required>
           </div>
           </div>
           </div>

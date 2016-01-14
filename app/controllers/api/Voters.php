@@ -6,17 +6,17 @@
  *
  * @author Onuwa Nnachi Isaac <matrix4u2002@gmail.com>
  */
-class Voter extends REST_Controller{
+class Voters extends REST_Controller{
 
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
     }
     
-    public function users_get()
+    public function index_get()
     {
         $id = $this->get('id');
-        $users = $this->users_model->get_all();
+        $users = $this->aauth->list_users('Default');
         if ($id === NULL)
         {
             if ($users)
@@ -57,7 +57,7 @@ class Voter extends REST_Controller{
         }
     }
 
-    public function users_post($message)
+    public function index_post($message)
     {
 //         $email = 'admin@admin.com';
 //         $pass = '123456';
@@ -72,7 +72,7 @@ class Voter extends REST_Controller{
         $this->set_response($message, REST_Controller::HTTP_CREATED);
     }
 
-    public function users_delete()
+    public function index_delete()
     {
         $id = $this->get('id');
         $id = (int) $id;

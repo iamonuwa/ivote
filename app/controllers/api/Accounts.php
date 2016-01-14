@@ -6,6 +6,8 @@
  *
  * @author Onuwa Nnachi Isaac <matrix4u2002@gmail.com>
  */
+
+
 class Accounts extends REST_Controller{
 
     public function __construct() {
@@ -59,16 +61,17 @@ class Accounts extends REST_Controller{
 
     public function index_post()
     {
+        
         $data = json_decode(file_get_contents("php://input")); 
         $surname = $data->surname;
         $firstname = $data->firstname;
         $othername = $data->othername;
         $dateofbirth = $data->dateofbirth;
         $gender = $data->gender;
-        $phone = $data->phone;
+        $phone = phone_helper($data->phone);
         $occupation = $data->occupation;
         $email = $data->email;
-        $pass = $data->pass;
+        $pass = generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds');
         $name = $data->name;
         if(empty($data->surname)){
             $error = 'Surnname is required';
@@ -76,8 +79,10 @@ class Accounts extends REST_Controller{
         }
         $create = $this->aauth->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,$email, $pass, $name);
         if($create){
-        $success = 'Account Has Been Created, Password is'.$pass;
+        $success = 'Account Has Been Created';
         $this->set_response($success, REST_Controller::HTTP_CREATED);            
+        $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
+        sms($phone, $message);
         }
         else{
         $error = $this->aauth->print_errors();

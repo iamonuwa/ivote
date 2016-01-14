@@ -56,12 +56,13 @@
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
-                <tr class="odd" role="row" ng-repeat="office in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                <tr class="odd" role="row" ng-repeat="data in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                     <!-- <td width="1%"><input name="selector[]" ng-modal="index" id="selector[]" value="{{ officer.id }}" type="checkbox"></td> -->
-                    <td>{{ office.name }}</td>
-                    <td>{{ office.officer }}</td>
-                    <td>{{ office.last_update | date:'medium'}}</td>
-                        <td> <a href="#/modify-role" class="btn btn-sm btn-success" ng-click="editData(role)" title="Modify role" ><span class="glyphicon glyphicon-edit"></span></a> <button type="submit" class="btn btn-sm btn-danger" ng-click="blockData(role.name)" name="delete" title="Block role"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(role)" name="print" title="Print role Details"><span class="glyphicon glyphicon-print"></span></button></td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.officer }}</td>
+                    <td>{{ data.last_update | date:'medium'}}</td>
+                        <td>  <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(data)" title="Modify Office" ><span class="glyphicon glyphicon-edit"></span></button> 
+                        <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(data.id)" name="unblock" title="Remove Office"><span class="glyphicon glyphicon-trash"></span></button></td>
                       </tr>
                       </tbody>
                   </table></div></div>
@@ -99,12 +100,8 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-12">
-            <label for="title" class="control-label">Position Title</label>
-             <input type="text" ng-model="title" class="form-control" id="title" required>
-          </div>
-           <div class="col-xs-12">
-            <label for="definition" class="control-label">Definition</label>
-            <textarea ng-model="definition" class="form-control" placeholder="Describe this position"></textarea>
+            <label for="title" class="control-label">Title</label>
+             <input type="text" ng-model="name" class="form-control" id="title" required>
           </div>
           </div>
           </div>
@@ -117,4 +114,28 @@
     </div>
   </div>
 </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="officeCtrl">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="ModalLabel">Edit Office # {{ item.id }}</h4>
+      </div>
+      <div class="modal-body">
+        <form name="addPermission">
+        <div class="form-group">
+          <label>Office</label>
+          <input type="text" ng-model="item.name" class="form-control">
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="getData()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" ng-click="updateData(item.id, item.name)"><span class="glyphicon glyphicon-edit"></span> Save Changes</button>
+      </div>
+    </div>
+  </div>
 </div>

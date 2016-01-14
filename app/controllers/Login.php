@@ -45,8 +45,8 @@ class Login extends CI_Controller {
 		 			redirect(base_url('voter/'.$this->aauth->get_user()->name),'refresh');
 		 		}
 		 		else{
-		 			var_dump($this->aauth->get_user()->name);
-		 			// redirect(base_url('backend'),'refresh');
+		 			// var_dump($this->aauth->get_user()->name);
+		 			redirect(base_url('backend'),'refresh');
 		 		}
 		 	}
 		 	// // var_dump($this->aauth->login($username, $password, $remember = FALSE, $totp_code = NULL));

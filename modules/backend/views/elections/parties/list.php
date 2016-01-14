@@ -89,35 +89,68 @@
         </section>
       </div>
       </div>
-              <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="partiesCtrl">
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="partiesCtrl">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">New Political Party</h4>
+        <h4 class="modal-title" id="ModalLabel">Register New Party</h4>
       </div>
       <div class="modal-body">
         <form name="add">
-         
-        <div class="row">
-          <div class="form-group">
-          <div class="col-xs-12">
-            <label for="name" class="control-label">Party Name</label>
-             <input type="text" ng-model="name" class="form-control" id="name" required>
-          </div>
-           <div class="col-xs-12">
-            <label for="definition" class="control-label">Definition</label>
-            <textarea ng-model="definition" class="form-control" placeholder="Describe this party"></textarea>
-          </div>
-          </div>
-          </div>
+        <div class="form-group">
+          <label>Party Name</label>
+          <input type="text" ng-model="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Party Slug</label>
+          <input type="text" ng-model="slug" class="form-control">
+        </div>
+        <div class="form-group">
+                      <label>Party Slogan</label>
+                      <textarea class="form-control" ng-model="definition" rows="3" placeholder="What is Party's Motto?"></textarea>
+                    </div>
+
+       
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Register Party</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getParties()">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Register New Party</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="partiesCtrl">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="ModalLabel">Modify Party {{ item.id }}</h4>
+      </div>
+      <div class="modal-body">
+        <form name="add">
+        <div class="form-group">
+          <label>Party Name</label>
+          <input type="text" ng-model="item.name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Party Slug</label>
+          <input type="text" ng-model="item.slug" class="form-control">
+        </div>
+        <div class="form-group">
+                      <label>Party Slogan</label>
+                      <textarea class="form-control" ng-model="item.description" rows="3" placeholder="What is Party's Motto?"></textarea>
+                    </div>
+
+       
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
+        <button type="button" class="btn btn-success"  data-dismiss="modal" ng-click="updateData(item.id, item.name, item.slug, item.description)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
+      </div>
+    </div>
+  </div>
 </div>

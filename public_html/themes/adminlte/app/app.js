@@ -142,7 +142,7 @@ myApp.controller('accountsCtrl', function($scope, $http, $route) {
     //Post to API
      $scope.add = function() {
         $scope.data = [];
-        $scope.pass = randomString(10);
+        // $scope.pass = randomString(10);
         $http.post(BASE_URL + 'api/accounts/index/', 
             {
                 'surname'     : $scope.surname, 
@@ -153,13 +153,13 @@ myApp.controller('accountsCtrl', function($scope, $http, $route) {
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
                 'email' : $scope.email,
-                'name' : randomString(7, "N"),
-                'pass' : $scope.pass
+                'name' : randomString(7, "N")
+                // 'pass' : $scope.pass
             }
         )
         .success(function (message) {
           toastr.success(message)
-            // $scope.reset();
+            $scope.reset();
             console.log(message);
             $route.reload();
         })
@@ -270,7 +270,7 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
 
   //Retrieve from API
     $scope.getData = function() {
-            $http.get(BASE_URL + "api/accounts/index/").success(function(data)
+            $http.get(BASE_URL + "api/voters/index/").success(function(data)
             {
         $scope.users = data;
         $scope.pagedItems = data;    
@@ -284,7 +284,7 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
     //Post to API
      $scope.add = function() {
         $scope.data = [];
-        $http.post(BASE_URL + 'api/accounts/index/', 
+        $http.post(BASE_URL + 'api/voters/index/', 
             {
                 'surname'     : $scope.surname, 
                 'firstname'     : $scope.firstname, 
@@ -322,7 +322,7 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
         console.log(index);
         var x = confirm("Are you sure you want to delete this?");
      if(x){
-        $http.delete(BASE_URL + "api/accounts/index/" + index)
+        $http.delete(BASE_URL + "api/voters/index/" + index)
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
@@ -348,7 +348,7 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
                 occupation  : index.occupation,
                 email       : index.email
         };
-        $http.put(BASE_URL + "api/accounts/index/" + data)
+        $http.put(BASE_URL + "api/voters/index/" + data)
         .success(function (message) {
             // toastr.success(message)
             console.log(message)

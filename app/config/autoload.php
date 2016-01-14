@@ -97,7 +97,7 @@ $autoload['helper'] = array('url','theme','site');
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array('aauth');
+$autoload['config'] = array('aauth','twilio');
 
 /*
 | -------------------------------------------------------------------

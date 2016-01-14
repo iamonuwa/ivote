@@ -54,7 +54,7 @@
                         <th>Type</th>
                         <th>Election Date</th>
                         <th>Created By</th>
-                        <th>Active</th>
+                        <th>Status</th>
                         <th>Date Created</th>
                         <th>Last Modified Date</th>
                       </tr>
@@ -68,7 +68,8 @@
                         <td>{{ data.is_active }}</td>
                         <td>{{ data.date_created }}</td>
                         <td>{{ data.last_update }}</td>
-                        <td>  <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(data)" title="Modify Election" ><span class="glyphicon glyphicon-edit"></span></button> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(data.id)" name="unblock" title="Remove Election"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(data)" name="print" title="Print Election Details"><span class="glyphicon glyphicon-print"></span></button></td>
+                        <td>  <button class="btn btn-sm btn-success" data-toggle="modal" ng-show="!data.is_active == 1" data-target="#editModal" ng-click="editData(data)" title="Modify Election" ><span class="glyphicon glyphicon-edit"></span></button> 
+                        <button type="submit" class="btn btn-sm btn-danger" ng-show="!data.is_active == 1" ng-click="deleteData(data.id)" name="unblock" title="Remove Election"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(data)" name="print" title="Print Election Details"><span class="glyphicon glyphicon-print"></span></button></td>
                       </tr>
                       </tbody>
                   </table></div></div>

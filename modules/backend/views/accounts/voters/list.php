@@ -59,7 +59,7 @@
                     </thead>
                     <tbody ng-init="getData()">
                       <tr class="odd" role="row" ng-repeat="voter in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-                        <td>{{ voter.surname+', '+voter.firstname+' '+voter.othername }}</td>
+                        <td>{{ voter.surname }} {{ voter.firstname }}  {{ voter.othername }}</td>
                         <td>{{ voter.name }}</td>
                         <td>{{ voter.email }}</td>
                         <td>{{ voter.phone }}</td>

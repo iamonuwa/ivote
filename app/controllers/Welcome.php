@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+// require APPPATH.'controllers/sms/services/twilio.php';
 class Welcome extends CI_Controller {
 
 	/**
@@ -33,4 +33,43 @@ class Welcome extends CI_Controller {
 			echo "SHuuu";
 		}
 	}
+
+	public function test()
+	{
+// 	$fields = array(
+// 	    'id'   => 'ID',
+// 	    'name' => 'Name',
+// 	    'age'  => 'Age'
+// 	);
+// 		$query = array();
+
+// 		$query[] = array(
+// 		    'id'   => 1,
+// 		    'name' => 'Ale Mohamad',
+// 		    'age'  => 29
+// 		);
+
+// 		$query[] = array(
+// 		    'id'   => 2,
+// 		    'name' => 'John Doe',
+// 		    'age'  => 36
+// 		);
+// // echo arrayToExcel($query, $fields, "People");
+
+// 		$data['title'] = "Annual Report"; // it can be any variable with content that the code will use
+
+// $fileName = date('YmdHis') . "_report";
+// $pdfView  = $this->load->view('pdf_template/pdf_template', $data, TRUE); // we need to use a view as PDF content
+// $cssView  = $this->load->view('pdf_template/pdf_template_css', NULL, TRUE); // the use a css stylesheet is optional
+
+// exportPDF($fileName, $pdfView, $cssView, 'P'); // then define the content and filename
+
+		$this->load->library('test');
+
+		echo $this->test->index();
+	
+	}
+
+
 }
+// 1453839627
