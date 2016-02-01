@@ -79,12 +79,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" ng-init="getUser">
-                  <img src="<?= base_url('public_html/uploads/default.png');?>" class="user-image" alt="<?= $this->aauth->get_user()->name; ?>">
+                  <img src="<?php if(isset($this->aauth->get_user()->picture)){ echo $this->aauth->get_user()->picture; } else{ echo base_url('public_html/uploads/default.png');}?>" class="user-image" alt="<?= $this->aauth->get_user()->name; ?>">
                   <span class="hidden-xs"><?= $this->aauth->get_user()->name; ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="user-header">
-                    <img src="<?= base_url('public_html/uploads/default.png');?>" class="img-circle" alt="User Image">
+                    <img src="<?php if(isset($this->aauth->get_user()->picture)){ echo $this->aauth->get_user()->picture; } else{ echo base_url('public_html/uploads/default.png');}?>" class="img-circle" alt="User Image">
                     <p>
                       Hello <?= $this->aauth->get_user()->name; ?>!
                       <small>Last Login <?= $this->aauth->get_user()->last_login;?></small>

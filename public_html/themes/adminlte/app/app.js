@@ -429,8 +429,6 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
           return selection;
     } 
     $scope.addPermToRole = function() {
-       var getCheckBox = $scope.checkboxSelection();
-       alert(getCheckBox);
         // $scope.selection = [];
         // $scope.toggleSelection = function toggleSelection(index) {
         //     var idx = $scope.selection.indexOf(index);
