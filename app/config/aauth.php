@@ -76,10 +76,12 @@ $config_aauth["default"] = array(
 	'admin_group'                    => 'admin',
 	'default_group'                  => 'default',
 	'public_group'                   => 'public',
+	'voter_group'					 => 'voter',
 
 	'db_profile'                     => 'default',
 
 	'users'                          => 'aauth_users',
+	'voters'						 => 'aauth_voters',
 	'groups'                         => 'aauth_groups',
 	'user_to_group'                  => 'aauth_user_to_group',
 	'perms'                          => 'aauth_perms',

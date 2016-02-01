@@ -39,8 +39,8 @@
    <div class="box">
                 <div class="box-header">
                 </div>
-  <form role="form" method="post">
-    <div class="row setup-content" id="step-1" ng-controller="voterCtrl">
+  <form role="form" ng-controller="voterCtrl">
+    <div class="row setup-content" id="step-1">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3> Personal Bio Data</h3>
@@ -70,9 +70,12 @@
           </div>
           <div class="col-md-4">
           <div class="form-group">
-            <label class="control-label">Gender</label>
-            <input maxlength="100" type="text" ng-model="gender" required="required" class="form-control"/>
-          </div>
+            <label for="gender" class="control-label">Gender</label>
+                    <select ng-model="gender" class="form-control">
+                      <option value="MALE">MALE</option>
+                      <option value="FEMALE">FEMALE</option>
+                    </select>
+            </div>
           </div>
            <div class="col-md-4">
           <div class="form-group">
@@ -110,10 +113,7 @@
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
           <h3> Capture Photo</h3>
-          
-          <div class="example-app-container">
-          <main class="app" ng-controller="voterCtrl as vm">
-                  <ng-camera
+                  <!-- <ng-camera
                   capture-message="Cheeeese!"
                   countdown="3"
                   output-height="160"
@@ -123,15 +123,22 @@
                   image-format="png"
                   jpeg-quality="100"
                   action-message="Take picture"
+                  ng-model="media"
                   snapshot="vm.picture"
                   flash-fallback-url="<?= base_url('public_html/ng-camera/javascripts/vendors/webcamjs/webcam.swf');?>"
                   overlay-url="<?= base_url('public_html/ng-camera/overlay.png');?>"
                   shutter-url="<?= base_url('public_html/ng-camera/shutter.mp3');?>"
-                  ></ng-camera>
-
-                  <img ng-if="vm.picture" ng-name="{{vm.picture}}" ng-src="{{vm.picture}}" alt="webcam picture">
-         </main>
-          </div>
+                  ></ng-camera> -->
+                  <ng-camera
+                    type="photo"
+                    enabled="true"
+                    width="320"
+                    height="240"
+                    countdown="3"
+                    ng-model="picture"
+                    capture="callback(picture)"
+                    capture-message="Go!"></ng-camera>
+                  <img ng-if="picture" ng-model="picture" ng-src="{{picture}}" alt="webcam picture">
 
           <div class="box-footer clearfix">
           <div class="btn-group">
@@ -147,7 +154,7 @@
           <h3> Capture Fingerprint</h3>
          <div class="box-footer clearfix">
           <div class="btn-group">
-          <button class="btn btn-primary nextBtn btn-flat pull-right" type="button" >Next</button>
+          <button class="btn btn-primary btn-flat pull-right" ng-click="add()" type="button" >Next</button>
           </div>
           </div>
         </div>

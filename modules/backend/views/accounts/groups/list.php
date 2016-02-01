@@ -150,24 +150,20 @@
         <h4 class="modal-title" id="ModalLabel">Assign Permission to {{role.name}}</h4>
       </div>
       <div class="modal-body">
-        <form name="addPermission">
+        <form name="addPermission" id="myform">
         <ul>
           <li ng-repeat="perm in item" class="checkbox"> 
           <label>
-            <input id="checkBox" type="checkbox" name="perms[]" value="{{perm.id}}" ng-checked="selection.indexOf(perm.id) > -1" ng-click="toggleSelection(perm.id)" />
+            <input id="checkBox" type="checkbox" name="perm.name" value="" />
             {{ perm.name }}
           </label>
           </li>
         </ul>
-        <span style="color:white;" class="selected-item">Selected Items:<span>
-           <div ng-repeat="name in selection" class="selected-item">
-            {{name}}
-           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addPermToRole()"><span class="fa fa-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="submit()"><span class="fa fa-plus-sign"></span> Save Changes</button>
       </div>
     </div>
   </div>
@@ -175,3 +171,13 @@
 
 </div>
 </section>
+<script>
+    var submit = function () {
+       $(this).find(':checkbox').each(function(){
+        if(this.checked)
+            alert(this.name + ' is checked');
+        else
+            alert(this.name + ' is not checked');
+    });
+    };
+</script>

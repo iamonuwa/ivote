@@ -193,7 +193,7 @@
 
     <script src="<?php theme_path('app/camera/webcam.js');?>"></script>
 
-    <script src="<?php theme_path('app/camera/ng-camera.js');?>"></script>
+    <script src="<?php theme_path('app/camera/angular-camera.js');?>"></script>
 
     <!-- Morris.js');?> charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>

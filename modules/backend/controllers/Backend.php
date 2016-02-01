@@ -95,6 +95,14 @@ class Backend extends CI_Controller {
 	{
 		$this->load->view('elections/candidates/list');
 	}
+	public function election_candidates_register()
+	{
+		$this->load->view('elections/candidates/add');
+	}
+	public function election_account_role_edit()
+	{
+		$this->load->view('accounts/groups/edit');
+	}
 	public function election_settings()
 	{
 		$this->load->view('elections/settings');

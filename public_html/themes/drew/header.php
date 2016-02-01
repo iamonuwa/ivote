@@ -83,10 +83,10 @@
 							<?php if($this->aauth->is_loggedin() && $this->aauth->is_member('Default')){?>
 							<li class="dropdown dropdown-hover user-menu">
 								<a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-expanded="false">
-								<img src="<?= base_url('public_html/uploads/default.png');?>" class="user-image" alt="<?= $this->aauth->get_user()->name; ?>"><?= $this->aauth->get_user()->name; ?> <span class="caret"></span></a>
+								<img src="<?php if(isset($this->aauth->get_user()->picture)) { echo $this->aauth->get_user()->picture; } else{ echo base_url('public_html/uploads/default.png'); }?>" class="user-image" alt="<?= $this->aauth->get_user()->name; ?>"><?= $this->aauth->get_user()->name; ?> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li class="user-header">
-                    <img src="<?= base_url('public_html/uploads/default.png');?>" class="img-circle" alt="User Image">
+                    <img src="<?php if(isset($this->aauth->get_user()->picture)) { echo $this->aauth->get_user()->picture; } else{ echo base_url('public_html/uploads/default.png'); }?>" class="img-circle" alt="User Image">
                     <p>
                       Welcome <?= $this->aauth->get_user()->name; ?>!
                       <small>Last Login <?= $this->aauth->get_user()->last_login;?></small>

@@ -1,15 +1,16 @@
 <?php get_header();
-$elections = json_decode(file_get_contents(base_url('api/office/')));?>
+$candidates = json_decode(file_get_contents(base_url('api/office/')));
+$election = json_decode(file_get_contents(base_url('api/elections/')));?>
 
 <section id="benefits" class="benefits-section section-gray section">
 
 				<div class="container">
 
-					<h2 class="section-heading text-center">Positions</h2>
+					<h2 class="section-heading text-center">Presidential Election</h2>
 
 					<div class="benefits-row row">
 
-						<?php foreach($elections as $key => $value){?>
+						<?php foreach($candidates as $key => $value){?>
 						<div class="col-sm-3 col-md-3">
 						<a href="<?= base_url('elections/'.strtolower($value->name));?>">
 							<div class="benefit">

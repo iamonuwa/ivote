@@ -13,7 +13,7 @@
           </ol>
         </section>
                 <div class="content">
-<div class="row" ng-controller="accountsCtrl">
+<div class="row" ng-controller="voterCtrl">
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
@@ -70,7 +70,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} registered accounts</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems | number}} registered voters</div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
@@ -79,7 +79,7 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                   <a href="#/register-voter" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Register New Account</a>
+                   <a href="#/register-voter" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Register New Voter</a>
                    
                 </div>
                  <div class="pull-right"></div>

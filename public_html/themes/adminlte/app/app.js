@@ -1,4 +1,4 @@
-var myApp = angular.module('ivoterApp', ['ngRoute', 'ngAnimate','ngResource','ui.bootstrap','camera']);  
+var myApp = angular.module('ivoterApp', ['ngRoute', 'ngAnimate','ngResource','ui.bootstrap','omr.directives']);  
 
 myApp.controller('navController', function ($scope){
     $scope.filteredItems =  [];
@@ -60,6 +60,10 @@ myApp.config(['$routeProvider',function ($routeProvider){
                     title: 'Roles Management',
                     templateUrl: BASE_URL + '/backend/election_account_role_list'
                 })
+                .when('assign-permission',{
+                    title: 'Assign Permissions',
+                    templateUrl: BASE_URL + '/backend/election_account_role_edit'
+                })
                 .when('/permissions',{
                     title: 'Permissions Management',
                     templateUrl: BASE_URL + '/backend/election_account_permission_list'
@@ -76,15 +80,18 @@ myApp.config(['$routeProvider',function ($routeProvider){
                     title: 'My Profile',
                     templateUrl: BASE_URL + 'backend/profile'
                 })
-
                 .when('/app-settings',{
                     title: 'Application Settings',
                     templateUrl: BASE_URL + 'backend/web_settings'
                 })
-                .when('/logout',{
-                    title: 'Logout User',
-                    templateUrl: BASE_URL + 'backend/login'
+                .when('/create-new',{
+                    title: 'New Candidate',
+                    templateUrl: BASE_URL + 'backend/election_candidates_register'
                 })
+                // .when('/logout',{
+                //     title: 'Logout User',
+                //     templateUrl: BASE_URL + 'backend/login'
+                // })
                 .otherwise({
                     redirectTo: 'pages/notfound.html'
                 });
@@ -283,7 +290,10 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
    
     //Post to API
      $scope.add = function() {
+        var vm = this;
         $scope.data = [];
+        // $scope.pass = randomString(10);
+        // console.log($scope.media);
         $http.post(BASE_URL + 'api/voters/index/', 
             {
                 'surname'     : $scope.surname, 
@@ -293,9 +303,10 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
                 'gender' : $scope.gender,
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
-                'email' : $scope.email,
+                // 'email' : $scope.email,
                 'name' : randomString(7, "N"),
-                'pass' : randomString(10)
+                'picture' : $scope.picture
+                // 'pass' : $scope.pass
             }
         )
         .success(function (message) {
@@ -304,6 +315,7 @@ myApp.controller('voterCtrl', function($scope, $http, $route) {
             $route.reload();
         })
         .error(function (message){
+            console.log($scope.snapshot);
            toastr.warning(message)
         });
     }
@@ -666,6 +678,12 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
+        })
+    }
+
+    $scope.getParty = function () {
+        $http.get(BASE_URL + 'api/parties').success(function (data) {
+            $scope.party = data;
         })
     }
     $scope.deleteData = function (index) {

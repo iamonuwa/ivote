@@ -21,7 +21,7 @@
               <div class="box box-primary">
                 <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="<?= base_url('public_html/uploads/default.png');?>" alt="User profile picture">
-                  <h3 class="profile-username text-center" ng-model="name"><?= $this->aauth->get_user()->surname.' '.$this->aauth->get_user()->firstname.' '.$this->aauth->get_user()->othername;?></h3>
+                  <h3 class="profile-username text-center"><?= $this->aauth->get_user()->surname.' '.$this->aauth->get_user()->firstname.' '.$this->aauth->get_user()->othername;?></h3>
                   <p class="text-muted text-center">Software Engineer</p>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -39,13 +39,18 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.surname" placeholder="Surname">
+                          <input type="text" class="form-control" ng-model="item.surname" placeholder="Surname" value="<?= $this->aauth->get_user()->surname;?>">
                         </div>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.firstname" placeholder="Firstname">
+                          <input type="text" class="form-control" ng-model="item.firstname" placeholder="Firstname" value="item.firstname">
                         </div>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.othername" placeholder="Othername">
+                          <input type="text" class="form-control" ng-model="item.othername" placeholder="Othername" value="item.othername">
+                        </div>
+                        <div class="col-sm-6">
+                          <select ng-model="item.gender">
+                            <option value="item.gender"></option>
+                          </select>
                         </div>
                       </div>
                       </div>

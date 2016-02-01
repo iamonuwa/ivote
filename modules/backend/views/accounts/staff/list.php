@@ -44,6 +44,7 @@
                   ><div class="col-sm-6">
                   <div class="dataTables_filter" id="datatables_filter">
                   <label>Search:<input aria-controls="datatables" placeholder="" ng-model="search" ng-change="filter()" class="form-control input-sm" type="search"></label>
+                    <a href="<?= base_url('welcome/test');?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> Export CSV</a>
                   </div></div></div>
                   <div class="row">
                   <div class="col-sm-12" ng-show="filteredItems > 0">
@@ -84,7 +85,7 @@
                 <div class="box-footer clearfix">
                 <div class="btn-group">
                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Register New Account</button>
-                   
+
                 </div>
                  <div class="pull-right"></div>
                 </div>
@@ -136,7 +137,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calender"></i>
                       </div>
-                      <input class="form-control" id="datemask" type="text" placeholder="dd/mm/yyyy" required>
+                      <input class="form-control" ng-model="dateofbirth" id="datemask" type="text" placeholder="dd/mm/yyyy" required>
                     </div>
                 </div>
             <div class="col-md-6">

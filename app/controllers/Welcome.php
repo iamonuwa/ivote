@@ -36,25 +36,25 @@ class Welcome extends CI_Controller {
 
 	public function test()
 	{
-// 	$fields = array(
-// 	    'id'   => 'ID',
-// 	    'name' => 'Name',
-// 	    'age'  => 'Age'
-// 	);
-// 		$query = array();
+	$fields = array(
+	    'id'   => 'S/N',
+	    'surname' => 'SURNAME',
+	    'firstname'=>'FIRSTNAME',
+	    'othername'=>'OTHERNAME',
+	    'dateofbirth'=>'DATE OF BIRTH',
+	    'gender'=>'SEX',
+	    'phone' => 'PHONE NUMBER',
+	    'occupation'=> 'UNIT',
+	    'picture' => FALSE,
+	    'email'  => 'EMAIL ADDRESS',
+	    'name' => 'ID NUMBER',
+	    'last_login' => 'LAST LOGIN'
+	);
+		$query = array();
 
-// 		$query[] = array(
-// 		    'id'   => 1,
-// 		    'name' => 'Ale Mohamad',
-// 		    'age'  => 29
-// 		);
-
-// 		$query[] = array(
-// 		    'id'   => 2,
-// 		    'name' => 'John Doe',
-// 		    'age'  => 36
-// 		);
-// // echo arrayToExcel($query, $fields, "People");
+$query = json_decode(file_get_contents(base_url('api/accounts')));
+		// $query = $this->aauth->list_users($group_par = FALSE, $limit = FALSE, $offset = FALSE, $include_banneds = FALSE);
+echo arrayToExcel($query, $fields, "Users");
 
 // 		$data['title'] = "Annual Report"; // it can be any variable with content that the code will use
 
@@ -64,12 +64,16 @@ class Welcome extends CI_Controller {
 
 // exportPDF($fileName, $pdfView, $cssView, 'P'); // then define the content and filename
 
-		$this->load->library('test');
+		// $this->load->library('test');
 
-		echo $this->test->index();
+		// echo $this->test->index();
 	
 	}
 
 
+public function demo()
+{
+	var_dump($this->voter->list_voters());
+}
 }
 // 1453839627

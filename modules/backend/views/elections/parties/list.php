@@ -110,8 +110,6 @@
                       <label>Party Slogan</label>
                       <textarea class="form-control" ng-model="definition" rows="3" placeholder="What is Party's Motto?"></textarea>
                     </div>
-
-       
         </form>
       </div>
       <div class="modal-footer">
