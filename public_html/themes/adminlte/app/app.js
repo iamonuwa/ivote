@@ -108,7 +108,7 @@ myApp.filter('startFrom', function() {
     });
 
 //Login Controller
-myApp.controller('loginCtrl', function($scope, $http, $location){
+myApp.controller('loginCtrl', function ($scope, $http, $location){
                 $scope.user = [];
                 $scope.loginAccount = function(){
                 $http.post(BASE_URL + 'api/login/', 
@@ -125,8 +125,22 @@ myApp.controller('loginCtrl', function($scope, $http, $location){
                 }
 });
 
+//Dashboard Controller
+myApp.controller('dashboardCtrl', function ($scope, $http) {
+    $scope.getCurrentUser = function () {
+            $http.get(BASE_URL + 'users/currentUser').success(function (data) {
+                $scope.CurrentUser = data;
+            })
+    }
+    $scope.getUserRole = function () {
+        $http.get(BASE_URL + 'users/getCurrentRole').success(function (data) {
+            $scope.CurrentRole = data;
+        })
+    }
+});
+
 //Accounts Controller
-myApp.controller('accountsCtrl', function($scope, $http, $route) {
+myApp.controller('accountsCtrl', function ($scope, $http, $route) {
     $scope.users    =  [];
 
     $scope.editData = function (index) {
@@ -227,7 +241,7 @@ myApp.controller('accountsCtrl', function($scope, $http, $route) {
 });
 
 //Lock Controller
-myApp.controller('lockCtrl', function($scope, $http, $route) {
+myApp.controller('lockCtrl', function ($scope, $http, $route) {
     $scope.users    =  [];
 
     $scope.editData = function (index) {
@@ -268,7 +282,7 @@ myApp.controller('lockCtrl', function($scope, $http, $route) {
 });
 
 //Voters Controller
-myApp.controller('voterCtrl', function($scope, $http, $route) {
+myApp.controller('voterCtrl', function ($scope, $http, $route) {
     $scope.users    =  [];
 
     $scope.editData = function (index) {
@@ -428,20 +442,15 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
           }
           return selection;
     } 
-    $scope.addPermToRole = function() {
-        // $scope.selection = [];
-        // $scope.toggleSelection = function toggleSelection(index) {
-        //     var idx = $scope.selection.indexOf(index);
-        //     console.log(index);
-        // // }
-        //     if (idx > -1) {
-        //    $scope.selection.splice(idx, 1);
-        //  }
-        //   else {
-        //     // $scope.selection.push(index);
-        //     console.log(selection);
-        //         }
-        //     };
+    $scope.addPermToRole = function(index, data) {
+        var selection = [];
+        // console.log(document.getElementById("test"));
+        var chkBox = document.getElementById("checkBox");
+        var chkBox_input = chkBox.checked;
+        for(var i=0; i<chkBox_input; i++) {
+            if(chkBox[i].type == 'checkbox' && chkBox[i].checked == true) selection.push(chkBox[i].value);
+          }
+          console.log(chkBox_input);
     }
 
     $scope.updateData = function (id, name, definition) {
@@ -560,9 +569,11 @@ myApp.controller('partiesCtrl', function ($scope, $http, $route) {
            'picture'    : '1'
         })
         .success(function (message) {
+            $route.reload();
             toastr.success(message)
         })
         .error(function (message) {
+            $route.reload();
             toastr.warning(message)
         });
         }
@@ -683,6 +694,23 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
     $scope.getParties = function() {
         $http.get(BASE_URL + 'api/parties').success(function (data) {
                 $scope.parties = data;
+                console.log($scope.parties);
+        })
+    }
+    $scope.getOffices = function() {
+        $http.get(BASE_URL + 'api/office').success(function (data) {
+                $scope.offices = data;
+        })
+    }
+    $scope.getStates = function() {
+        $http.get(BASE_URL + 'election_candidates/getState').success(function (data) {
+                $scope.states = data;
+        })
+    }
+
+    $scope.getLGA = function (index) {
+        $http.get(BASE_URL + 'election_candidates/getLGAByState/'+ index).success(function (data) {
+            $scope.lgas = data;
         })
     }
     $scope.deleteData = function (index) {

@@ -52,7 +52,7 @@
                       <tr role="row">
                         <th>Name</th>
                         <th>ID Number</th>
-                        <th>Email Address</th>
+                        <!-- <th>Email Address</th> -->
                         <th>Phone Number</th>
                         <th>Gender</th>
                       </tr>

@@ -15,7 +15,7 @@
  <div class="content">
 
 
- <div class="box box-primary">
+ <div class="box box-primary" ng-controller="candidatesCtrl">
                 <div class="box-header with-border">
                 </div><!-- /.box-header -->
                 <!-- form start -->
@@ -57,15 +57,14 @@
                      <div class="form-group">
     <div class="col-xs-6">
                     <label>Select Political Party</label>
-                   <select ng-model="political_party" class="form-control" ng-init="getParty()">
+                   <select ng-model="political_party" class="form-control" ng-init="getParties()">
                           <option ng-repeat="party in parties" value="{{party.name}}">{{party.name}}</option>
                         </select>
                   </div>
                   <div class="col-xs-6">
                     <label>Aspired Political Office</label>
-                    <select ng-model="education" class="form-control">
-                          <option value="MALE">MALE</option>
-                          <option value="FEMALE">FEMALE</option>
+                    <select ng-model="education" class="form-control" ng-init="getOffices()">
+                          <option ng-repeat="office in offices" value="{{office.name}}">{{office.name}}</option>
                         </select>
                   </div>
                 </div>
@@ -80,16 +79,15 @@
                   </div>
                   <div class="col-xs-4">
                     <label>Select State</label>
-                     <select ng-model="state" class="form-control">
-                          <option value="MALE">MALE</option>
-                          <option value="FEMALE">FEMALE</option>
+                     <select ng-model="state" class="form-control" ng-init="getStates()">
+                          <option ng-repeat="state in states" value="{{state.name}}">{{state.name}}</option>
                         </select>
                   </div>
                   <div class="col-xs-4">
                     <label>Select Constituency</label>
-                     <select ng-model="constituency" class="form-control">
-                          <option value="MALE">MALE</option>
-                          <option value="FEMALE">FEMALE</option>
+                     <select ng-model="constituency" class="form-control" ng-init="getLGA()">
+                        <option>-- Please Select --</option>
+                          <option ng-repeat="lga in lgas" value="{{lga.name}}">{{lga.name}}</option>
                         </select>
                   </div>
                 </div>

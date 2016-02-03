@@ -163,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addPermToRole()"><span class="fa fa-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addPermToRole(role.id, perm.id)"><span class="fa fa-plus-sign"></span> Save Changes</button>
       </div>
     </div>
   </div>

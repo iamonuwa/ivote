@@ -68,3 +68,6 @@ $route['elections'] = 'frontend/elections';
 /* Frontend Begins  */
 $route['voter/(:any)'] = 'frontend/voter';
 $route['logout'] = 'frontend/logout';
+
+// $route['api/accounts/current'] = 'api/accounts/current'; 
+// $route['api/candidates/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/candidates/index/id/$1/format/$3$4';
