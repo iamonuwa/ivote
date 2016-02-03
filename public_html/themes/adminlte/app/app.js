@@ -446,7 +446,7 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         var selection = [];
         // console.log(document.getElementById("test"));
         var chkBox = document.getElementById("checkBox");
-        var chkBox_input = chkBox.checked;
+        var chkBox_input = chkBox.length;
         for(var i=0; i<chkBox_input; i++) {
             if(chkBox[i].type == 'checkbox' && chkBox[i].checked == true) selection.push(chkBox[i].value);
           }
@@ -802,19 +802,12 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
 // Profile Controller
 myApp.controller('profileCtrl', function ($scope, $http, $route) {
     $scope.getData = function() {
-        $http.get(BASE_URL + 'api/elections/index').success(function (data) {
+        $http.get(BASE_URL + 'users/currentUser').success(function (data) {
              // $scope.candidates = data;
-        $scope.pagedItems = data;    
-        $scope.currentPage = 1; //current page
-        $scope.entryLimit = 10; //max no of items to display in a page
-        $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
-        $scope.totalItems = $scope.pagedItems.length;
+        $scope.user = data;    
         })
     }
 
-    $scope.editData = function (index) {
-         angular.element(document.getElementById("editModal")).scope().item = index;
-        };
     $scope.updateData = function (id, title, category, election_date, duration) {
         $http.put(BASE_URL + "api/elections/index/" + id  + "/" + title + "/" + category + "/" + election_date + "/" + duration)
         .success(function (message) {

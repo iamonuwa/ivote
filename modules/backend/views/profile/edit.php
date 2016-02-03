@@ -6,7 +6,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
+            <li><a href="#">Accounts</a></li>
             <li class="active">User profile</li>
           </ol>
         </section>
@@ -18,11 +18,11 @@
             <div class="col-md-3">
 
               <!-- Profile Image -->
-              <div class="box box-primary">
+              <div class="box box-primary"ng-init="getData()">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="<?= base_url('public_html/uploads/default.png');?>" alt="User profile picture">
-                  <h3 class="profile-username text-center"><?= $this->aauth->get_user()->surname.' '.$this->aauth->get_user()->firstname.' '.$this->aauth->get_user()->othername;?></h3>
-                  <p class="text-muted text-center">Software Engineer</p>
+                  <img class="profile-user-img img-responsive img-circle" src="<?php if($this->aauth->get_user()->picture !== '') { echo $this->aauth->get_user()->picture; } else{ echo base_url('public_html/uploads/default.png'); }?>" alt="User profile picture">
+                  <h3 class="profile-username text-center">{{ user.surname }} {{ user.firstname }} {{ user.othername }}</h3>
+                  <p class="text-muted text-center" ng-init="getRole()">{{role.name}}</p>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 
@@ -35,24 +35,50 @@
                 </ul>
                 <div class="tab-content">
                   <div class="active tab-pane" id="settings">
-                  <form>
-                    <div class="row">
+                  <form class="form-horizontal">
                       <div class="form-group">
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.surname" placeholder="Surname" value="<?= $this->aauth->get_user()->surname;?>">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                          <input class="form-control input-lg" id="inputName" ng-model="user.surname" placeholder="Surname" type="text">
                         </div>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.firstname" placeholder="Firstname" value="item.firstname">
                         </div>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" ng-model="item.othername" placeholder="Othername" value="item.othername">
+                         <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                         <div class="col-sm-10">
+                          <input class="form-control input-lg" id="inputName" ng-model="user.firstname" placeholder="Firstname" type="text">
                         </div>
-                        <div class="col-sm-6">
-                          <select ng-model="item.gender">
-                            <option value="item.gender"></option>
-                          </select>
+                        </div>
+                         <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                         <div class="col-sm-10">
+                          <input class="form-control input-lg" id="inputName" ng-model="user.othername" placeholder="Othername" type="text">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label for="inputGender" class="col-sm-2 control-label">Gender</label>
+                        <div class="col-sm-10">
+                          <select class="form-control input-lg" id="inputGender" ng-selected="user.gender">
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
+                          </select>
+                       </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputDateOfBirth" class="col-sm-2 control-label">Date Of Birth</label>
+                        <div class="col-sm-10">
+                          <input class="form-control input-lg" id="inputDateOfBirth" ng-model="user.dateofbirth" placeholder="Date of Birth" type="text">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="inputPhone" class="col-sm-2 control-label">Phone Number</label>
+                        <div class="col-sm-10">
+                          <input class="form-control input-lg" id="inputPhone" ng-model="user.phone" placeholder="Phone Number" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-success" ng-click="updateData()">Save Changes</button>
+                        </div>
                       </div>
                     </form>
                   </div><!-- /.tab-pane -->
