@@ -62,8 +62,8 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
                         <!-- <td>{{ user.gender }}</td> -->
-                        <td>{{ user.unit }}</td>
-                        <td> <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(user)" title="Modify Account" ><span class="glyphicon glyphicon-edit"></span></button> <button type="submit" class="btn btn-sm btn-success" ng-click="deleteData(user.id)" name="delete" title="Re-activate Account"><span class="fa fa-unlock-alt"></span></button> </td>
+                        <td>{{ user.occupation }}</td>
+                        <td>  <button type="submit" class="btn btn-sm btn-success" ng-click="deleteData(user.id)" name="delete" title="Re-activate Account"><span class="fa fa-unlock-alt"></span></button> </td>
                       </tr>
                       </tbody>
                   </table></div></div>

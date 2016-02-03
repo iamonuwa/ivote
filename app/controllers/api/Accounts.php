@@ -39,7 +39,7 @@ class Accounts extends REST_Controller{
     public function index_get()
     {
         $id = $this->get('id');
-        $users = $this->users_model->get_all();
+        $users = $this->aauth->list_users($group_par = FALSE, $limit = FALSE, $offset = FALSE, $include_banneds = FALSE);
         if ($id === NULL)
         {
             if ($users)

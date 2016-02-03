@@ -1,7 +1,3 @@
-<?php 
-$party = json_decode(file_get_contents(base_url('api/parties')));
-$office = json_decode(file_get_contents(base_url('api/office')));
-?>
 
 <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -61,23 +57,15 @@ $office = json_decode(file_get_contents(base_url('api/office')));
                      <div class="form-group">
     <div class="col-xs-6">
                     <label>Select Political Party</label>
-                     <select
-                     ng-init="getParty"
-                      ng-model="party"
-                      ng-options="party.id as party.name for party in getParty">{{ party.name }}</select>
-                   
+                   <select ng-model="political_party" class="form-control" ng-init="getParty()">
+                          <option ng-repeat="party in parties" value="{{party.name}}">{{party.name}}</option>
+                        </select>
                   </div>
                   <div class="col-xs-6">
                     <label>Aspired Political Office</label>
-                     <select ng-model="office" class="form-control">
-                          <?php if(count($office) > 0){
-                           foreach ($office as $key => $value) {
-                          echo '<option value='.$value->id.'>'.$value->name.'</option>';
-                         }
-                         }
-                         else{
-                          echo '<option>No Office Created</option>';
-                          }?>
+                    <select ng-model="education" class="form-control">
+                          <option value="MALE">MALE</option>
+                          <option value="FEMALE">FEMALE</option>
                         </select>
                   </div>
                 </div>

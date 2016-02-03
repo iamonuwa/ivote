@@ -668,6 +668,7 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
 });
 // Candidates Controller
 myApp.controller('candidatesCtrl', function ($scope, $http) {
+    $scope.data = {};
     $scope.getData = function() {
         $http.get(BASE_URL + 'api/candidates/index').success(function (data) {
              // $scope.candidates = data;
@@ -676,12 +677,12 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
-        })
+    console.log($scope.pagedItems)
+            })
     }
-
-    $scope.getParty = function () {
+    $scope.getParties = function() {
         $http.get(BASE_URL + 'api/parties').success(function (data) {
-            $scope.party = data;
+                $scope.parties = data;
         })
     }
     $scope.deleteData = function (index) {
@@ -702,6 +703,7 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         else{}
         }
 });
+ 
 
 // Election Controller
 myApp.controller('electionCtrl', function ($scope, $http, $route) {
@@ -713,6 +715,7 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
+        // console.log($scope.pagedItems)
         })
     }
 
