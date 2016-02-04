@@ -64,19 +64,14 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <ul class="nav nav-pills nav-stacked">
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    <li>Computer Name:</li>
-                    
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#"> Computer Name:</a></li>
                   </ul>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
