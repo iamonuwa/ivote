@@ -60,7 +60,7 @@ myApp.config(['$routeProvider',function ($routeProvider){
                     title: 'Roles Management',
                     templateUrl: BASE_URL + '/backend/election_account_role_list'
                 })
-                .when('assign-permission',{
+                .when('/assign-permission',{
                     title: 'Assign Permissions',
                     templateUrl: BASE_URL + '/backend/election_account_role_edit'
                 })
@@ -127,15 +127,25 @@ myApp.controller('loginCtrl', function ($scope, $http, $location){
 
 //Dashboard Controller
 myApp.controller('dashboardCtrl', function ($scope, $http) {
+    // $scope.getComputerName = function () {
+    //     $http.get(BASE_URL + 'dashboard/getComputerName').success(function (data) {
+    //         $scope.getComputer = data;
+    //     })
+    // }
+    // $scope.Browser  = function () {
+    //     $http.get(BASE_URL + 'dashboard/getBrowser').success(function (data) {
+    //         $scope.getActiveBrowser = data;
+    //     })
+    // }
+    // $scope.BrowserVersion = function  () {
+    //     $http.get(BASE_URL + 'dashboard/getBrowserVersion').success(function (data) {
+    //         $scope.getActiveBrowserVersion = data;
+    //     })
+    // }
     $scope.getCurrentUser = function () {
             $http.get(BASE_URL + 'users/currentUser').success(function (data) {
                 $scope.CurrentUser = data;
             })
-    }
-    $scope.getUserRole = function () {
-        $http.get(BASE_URL + 'users/getCurrentRole').success(function (data) {
-            $scope.CurrentRole = data;
-        })
     }
 });
 
@@ -218,18 +228,9 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
         else{}
         }
 
-    $scope.updateData = function (index) {
-        var data = {
-                surname     : index.surname, 
-                firstname   : index.firstname, 
-                othername   : index.othername,
-                dateofbirth : index.dateofbirth,
-                gender      : index.gender,
-                phone       : index.phone,
-                occupation  : index.occupation,
-                email       : index.email
-        };
-        $http.put(BASE_URL + "api/accounts/index/" + data)
+    $scope.updateData = function () {
+            // console.log(item.surname);
+        $http.put(BASE_URL + "api/accounts/index/" + surname + "/" + firstname + "/" + othername + "/" + gender + "/" + phone)
         .success(function (message) {
             // toastr.success(message)
             console.log(message)
@@ -238,6 +239,36 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
             toastr.warning(message)
         })
     }
+
+    // $scope.updateData = function (index) {
+    //     // console.log(index)
+    //     // $http.put(BASE_URL + "api/accounts/index/" + index).success(function (message) {
+    //     //         console.log(message)
+    //     //     }).error(function (message) {
+    //     //         console.log(message)
+    //     //     });
+    //     var data = {
+    //             id          : index.id,
+    //             surname     : index.surname, 
+    //             firstname   : index.firstname, 
+    //             othername   : index.othername,
+    //             dateofbirth : index.dateofbirth,
+    //             gender      : index.gender,
+    //             phone       : index.phone,
+    //             occupation  : index.occupation,
+    //             email       : index.email
+    //     };
+
+    //     // console.log(data)
+    //     $http.put(BASE_URL + "api/accounts/index/" + data)
+    //     .success(function (message) {
+    //         // toastr.success(message)
+    //         console.log(message)
+    //     })
+    //     .error(function (message) {
+    //         toastr.warning(message)
+    //     })
+    // }
 });
 
 //Lock Controller
@@ -363,18 +394,8 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         else{}
         }
 
-    $scope.updateData = function (index) {
-        var data = {
-                surname     : index.surname, 
-                firstname   : index.firstname, 
-                othername   : index.othername,
-                dateofbirth : index.dateofbirth,
-                gender      : index.gender,
-                phone       : index.phone,
-                occupation  : index.occupation,
-                email       : index.email
-        };
-        $http.put(BASE_URL + "api/voters/index/" + data)
+    $scope.updateData = function (surname, firstname, othername, dateofbirth, gender, phone, occupation, email) {
+        $http.put(BASE_URL + "api/voters/index/" + surname + "/" + firstname + "/" + othername + "/" + dateofbirth + "/" + gender + "/" + phone + "/" + occupation + "/" + email, {cache:true})
         .success(function (message) {
             // toastr.success(message)
             console.log(message)
@@ -420,16 +441,16 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         })
     }
 
-    $scope.getDataByRole = function (index) {
-        // console.log(index)
-        $http.get(BASE_URL + "api/permissions/index")
-        .success(function (data) {
-            // console.log(index)
-            angular.element(document.getElementById("roleModal")).scope().item = data;
-            angular.element(document.getElementById("roleModal")).scope().role = index;
-        })
-        .error(function (data) {
-        });
+    $scope.getDataByRole = function () {
+        console.log("Hello")
+        // $http.get(BASE_URL + "api/permissions/index")
+        // .success(function (data) {
+        //     // console.log(index)
+        //     angular.element(document.getElementById("roleModal")).scope().item = data;
+        //     angular.element(document.getElementById("roleModal")).scope().role = index;
+        // })
+        // .error(function (data) {
+        // });
     }
 
     $scope.checkboxSelection = function () {
@@ -808,10 +829,21 @@ myApp.controller('profileCtrl', function ($scope, $http, $route) {
         })
     }
 
-    $scope.updateData = function (id, title, category, election_date, duration) {
-        $http.put(BASE_URL + "api/elections/index/" + id  + "/" + title + "/" + category + "/" + election_date + "/" + duration)
+     $scope.updateData = function (index) {
+        var data = {
+                surname     : index.surname, 
+                firstname   : index.firstname, 
+                othername   : index.othername,
+                dateofbirth : index.dateofbirth,
+                gender      : index.gender,
+                phone       : index.phone,
+                occupation  : index.occupation,
+                email       : index.email
+        };
+        $http.put(BASE_URL + "api/accounts/index/" + index.id + "/" + index.surname + "/" + index.firstname + "/" + index.othername + "/" + index.dateofbirth + "/" + index.gender + "/" + index.phone )
         .success(function (message) {
             toastr.success(message)
+            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)

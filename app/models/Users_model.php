@@ -44,7 +44,7 @@ class Users_model extends MY_Model{
     unset($param['pass']);
     unset($param['banned']);
     unset($param['deleted']);
-    // unset($param['last_login']);
+    unset($param['last_login']);
     unset($param['last_activity']);
     unset($param['last_login_attempt']);
     unset($param['forgot_exp']);

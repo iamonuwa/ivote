@@ -77,7 +77,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-success" ng-click="updateData()">Save Changes</button>
+                          <button type="submit" class="btn btn-success" ng-click="updateData(user)">Save Changes</button>
                         </div>
                       </div>
                     </form>

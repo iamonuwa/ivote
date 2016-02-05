@@ -140,11 +140,24 @@ class Accounts extends REST_Controller{
         }
     }
 
-    public function index_put($param)
+    public function index_put($id, $surname, $firstname, $othername, $dateofbirth, $gender, $phone)
     {
-        // $id = $param->id;
-        // $id = $this->put('surname');
-        echo $param;
+        $data['surname'] = $surname;
+        $data['firstname'] = $firstname;
+        $data['othername'] = $othername;
+        $data['dateofbirth'] = $dateofbirth;
+        $data['gender'] = $gender;
+        $data['phone'] = $phone;
+        // $update = $this->aauth->update_user($id, $surname, $firstname, $othername, $dateofbirth, $gender, $phone);
+        $update = $this->users_model->update($id, $data);
+        if($update){
+            $success = $this->aauth->get_user()->name.' account has been updated successfully';
+            $this->set_response($success, REST_Controller::HTTP_OK); 
+            }
+        else{
+            $error = 'Failed to Update';
+            $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST); 
+        }
     }
 
 }

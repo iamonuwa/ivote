@@ -204,6 +204,3 @@ angular.module('omr.directives', []).directive('ngCamera', function($timeout, $s
     }
   };
 });
-
-Run
-Link

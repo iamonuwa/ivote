@@ -211,8 +211,8 @@
     <script src="<?php theme_path('plugins/input-mask/jquery.inputmask.date.extensions.js');?>"></script>
     <script src="<?php theme_path('plugins/input-mask/jquery.inputmask.extensions.js');?>"></script>
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="<?php theme_path('dist/js/moment.min.js');?>"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> -->
+    <!-- <script src="<?php //theme_path('dist/js/moment.min.js');?>"></script> -->
     <script src="<?php theme_path('plugins/daterangepicker/daterangepicker.js');?>"></script>
     <!-- datepicker -->
     <script src="<?php theme_path('plugins/datepicker/bootstrap-datepicker.js');?>"></script>

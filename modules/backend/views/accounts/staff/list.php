@@ -261,7 +261,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" ng-click="updateData(item)"><span class="gyphicon glyphicon-edit"></span> Save Changes</button>
+        <button type="button" class="btn btn-success" ng-click="updateData(item.surname,item.firstname,item.othername,item.gender,item.phone)"><span class="gyphicon glyphicon-edit"></span> Save Changes</button>
       </div>
     </div>
   </div>

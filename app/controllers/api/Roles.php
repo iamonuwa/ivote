@@ -119,7 +119,7 @@ class Roles extends REST_Controller{
         }
 
         }
-    }
+    } 
     public function index_put($id, $name, $definition)
     {
         $data['name'] = str_replace("%20", " ", $name);

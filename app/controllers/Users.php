@@ -18,6 +18,13 @@ class Users extends CI_Controller {
 		echo json_encode('Admin');
 	}
 
+	public function editUser()
+	{
+		$id = $this->aauth->get_user()->id;
+		// $this->aauth->update_user()
+		var_dump('Edit Profile');
+	}
+
 }
 
 /* End of file Users */

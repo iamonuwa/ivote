@@ -800,7 +800,7 @@ class Aauth {
 	 * @param string|bool $name User's name, or FALSE if not to be updated
 	 * @return bool Update fails/succeeds
 	 */
-	public function update_user($user_id, $email = FALSE, $pass = FALSE, $name = FALSE) {
+	public function update_user($user_id , $surname, $firstname, $othername, $dateofbirth, $gender, $phone , $email = FALSE, $pass = FALSE, $name = FALSE) {
 
 		$valid = TRUE;
 

@@ -64,11 +64,8 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <ul class="nav nav-pills nav-stacked">
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="#" ng-init="getCurrentUser()"> ID Number: {{CurrentUser.name}}</a></li>
+                    <li> <a href="#" ng-init="getCurrentUser()"> Last Login: {{CurrentUser.last_login}}</a></li>
                     <li> <a href="#"> Computer Name:</a></li>
                     <li> <a href="#"> Computer Name:</a></li>
                     <li> <a href="#"> Computer Name:</a></li>

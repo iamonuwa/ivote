@@ -1,26 +1,26 @@
-<div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="rolesCtrl">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">Assign Permission to {{role.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <form name="addPermission">
-        <ul>
-          <li ng-repeat="perm in item" class="checkbox"> 
-          <label>
-            <input id="checkBox" checkbox-group/>
-            {{ perm.name }}
-          </label>
-          </li>
-        </ul>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addPermToRole(perm, role.id)"><span class="fa fa-plus-sign"></span> Save Changes</button>
-      </div>
+
+<!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <!-- <li class="active">{{ title }}</li> -->
+          </ol>
+        </section>
+ <div class="content">
+
+ <div class="box box-primary" ng-controller="rolesCtrl">
+                <div class="box-header with-border">
+                <h4>Assign Permission to {{role.name}}</h4>
+                </div><!-- /.box-header -->
+                  <div class="box-body">
+                  Hello World
+                </div>
+            </div>
     </div>
-  </div>
 </div>
