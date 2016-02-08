@@ -59,7 +59,7 @@
                         <td>{{ role.name }}</td>
                         <td>{{ role.definition }}</td>
                         <td> 
-                        <a href="#assign-permission" ng-click="getDataByRole()" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></a>
+                        <a ng-href="#assign-permission" ng-click="getDataByRole(role)" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></a>
                            <button type="submit" class="btn btn-sm btn-success" ng-click="editData(role)" data-toggle="modal" data-target="#editModal" name="edit"><span class="glyphicon glyphicon-edit"></span> </button> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(role.id)" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
                         </td>
                       </tr>

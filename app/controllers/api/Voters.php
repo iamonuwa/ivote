@@ -101,8 +101,8 @@ class Voters extends REST_Controller{
         if($create){
         $success = 'Voter '.$name.' Has Been Registered';
         $this->set_response($success, REST_Controller::HTTP_CREATED);            
-        // $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
-        // sms($phone, $message);
+        $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
+        sms($phone, $message);
         }
         else{
         $error = $this->voter->print_errors();

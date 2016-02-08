@@ -82,20 +82,24 @@ class Candidates extends REST_Controller{
 
     public function index_post()
     {
-//         $email = 'admin@admin.com';
-//         $pass = '123456';
-//         $name = '15286';
-//         $this->auth->create_user($email, $pass, $name);
-        $message = [
-             'email' => 'i_onuwa4u@outlook.com',
-                'pass' => 'Beautiful4u',
-                        'name' => '15286'
-        ];
-
-        $this->set_response($message, REST_Controller::HTTP_CREATED);
+        $data = json_decode(file_get_contents("php://input"));
+        $data->date_created = date("F j, Y, g:i a", time()); 
+        // var_dump($data);
+        $create = $this->candidates_model->insert($data);
+        if($create){
+        $success = 'Candidate Has Been Registered';
+        $this->set_response($success, REST_Controller::HTTP_CREATED);            
+        $message = "Your Registration was successfully, we wish you best of luck";
+        sms($phone, $message);
+        }
+        else{
+        $error = $this->aauth->print_errors();
+            $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
-public function index_delete($id)
+
+    public function index_delete($id)
     {
         // $id = $this->get('id');
         $id = (int) $id;
@@ -106,7 +110,7 @@ public function index_delete($id)
             $this->response($error, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
         else{
-        $delete = $this->office_model->delete_by('id',$id);
+        $delete = $this->candidates_model->delete_by('id',$id);
         if($delete){
             $success = 'Candidate #'.$id.' has been deleted successfully';
             $this->set_response($success, REST_Controller::HTTP_OK); 
@@ -116,6 +120,30 @@ public function index_delete($id)
             $this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
         }
 
+        }
+    }
+        public function index_put($id, $surname, $firstname, $othername, $dateofbirth, $gender, $party, $office, $education, $state, $constituency, $phone, $email)
+    {
+        $data['surname'] = $surname;
+        $data['firstname'] = $firstname;
+        $data['othername'] = $othername;
+        $data['dateofbirth'] = $dateofbirth;
+        $data['gender'] = $gender;
+        $data['party'] = str_replace("%20", " ", $party);
+        $data['office'] = str_replace("%20", " ", $office);
+        $data['education'] = str_replace("%20", " ", $education);
+        $data['state'] = str_replace("%20", " ", $state);
+        $data['constituency'] = str_replace("%20", " ", $constituency);
+        $data['phone'] = $phone;
+        $data['email'] = $email;
+        $update = $this->candidates_model->update($id, $data);
+        if($update){
+            $success = "Candidate - ".$surname." ".$firstname." ".$othername." has been updated successfully";
+            $this->set_response($success, REST_Controller::HTTP_OK); 
+        }
+        else{
+            $error = 'Failed to Update';
+            $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST); 
         }
     }
 

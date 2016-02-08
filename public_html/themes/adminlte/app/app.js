@@ -357,10 +357,9 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         .success(function (message) {
           toastr.success(message)
             // $scope.reset();
-            $route.reload();
+            // $route.reload();
         })
         .error(function (message){
-            console.log($scope.snapshot);
            toastr.warning(message)
         });
     }
@@ -441,8 +440,8 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         })
     }
 
-    $scope.getDataByRole = function () {
-        console.log("Hello")
+    $scope.getDataByRole = function (index) {
+        console.log(index)
         // $http.get(BASE_URL + "api/permissions/index")
         // .success(function (data) {
         //     // console.log(index)
@@ -700,7 +699,6 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
 });
 // Candidates Controller
 myApp.controller('candidatesCtrl', function ($scope, $http) {
-    $scope.data = {};
     $scope.getData = function() {
         $http.get(BASE_URL + 'api/candidates/index').success(function (data) {
              // $scope.candidates = data;
@@ -709,31 +707,85 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
-    console.log($scope.pagedItems)
+    // console.log($scope.pagedItems)
             })
     }
     $scope.getParties = function() {
         $http.get(BASE_URL + 'api/parties').success(function (data) {
                 $scope.parties = data;
-                console.log($scope.parties);
-        })
+        });
     }
     $scope.getOffices = function() {
         $http.get(BASE_URL + 'api/office').success(function (data) {
                 $scope.offices = data;
-        })
+        });
     }
     $scope.getStates = function() {
         $http.get(BASE_URL + 'election_candidates/getState').success(function (data) {
                 $scope.states = data;
-        })
+        });
     }
 
     $scope.getLGA = function (index) {
         $http.get(BASE_URL + 'election_candidates/getLGAByState/'+ index).success(function (data) {
             $scope.lgas = data;
+        });
+    }
+
+    $scope.addData = function () {
+        $http.post(BASE_URL + 'api/candidates/index',{
+            'surname'       : $scope.surname,
+            'firstname'     : $scope.firstname,
+            'othername'     : $scope.othername,
+            'dateofbirth'   : $scope.dateofbirth,
+            'gender'        : $scope.gender,
+            'party'         : $scope.party,
+            'office'        : $scope.office,
+            'education'     : $scope.education,
+            'state'         : $scope.state,
+            'constituency'  : $scope.constituency,
+            'phone'         : $scope.phone,
+            'email'         : $scope.email,
+            'picture'       : $scope.passport
+        }).success( function (message) {
+            toastr.success(message)
+            console.log($scope.passport)
+        }).error( function (message) {
+            toastr.warning(message)
+            console.log(message)
+        });
+    }
+
+     $scope.editData = function (index) {
+         angular.element(document.getElementById("editModal")).scope().item = index;
+        };
+
+    $scope.updateData = function (index) {
+        // var data = {
+        //         surname     : index.surname, 
+        //         firstname   : index.firstname, 
+        //         othername   : index.othername,
+        //         dateofbirth : index.dateofbirth,
+        //         gender      : index.gender,
+        //         party       : index.party,
+        //         office      : index.office,
+        //         education   : index.education,
+        //         state       : index.state,
+        //         constituency: index.constituency,
+        //         phone       : index.phone,
+        //         email       : index.email
+        // };
+        $http.put(BASE_URL + "api/candidates/index/" + index.id + "/" + index.surname + "/" + index.firstname + "/" + index.othername + "/" + index.dateofbirth + "/" + index.gender + "/" + index.party + "/" + index.office + "/" + index.education + "/" + index.state + "/" + index.constituency + "/" + index.phone + "/" + email)
+        .success(function (message) {
+            toastr.success(message)
+            // console.log(message)
+        })
+        .error(function (message) {
+            toastr.warning(message)
         })
     }
+
+
     $scope.deleteData = function (index) {
         var x = confirm("Are you sure you want to delete this?");
      if(x){
@@ -792,7 +844,6 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
         .success( function (message) {
             // $scope.reset();
             toastr.success(message);
-            console.log(message);
             $scope.getData();
             $route.reload();
         })

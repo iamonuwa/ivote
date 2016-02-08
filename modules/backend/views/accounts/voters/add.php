@@ -153,6 +153,7 @@
         <div class="col-md-12">
           <h3> Capture Fingerprint</h3>
          <div class="box-footer clearfix">
+         
           <div class="btn-group">
           <button class="btn btn-primary btn-flat pull-right" ng-click="add()" type="button" >Next</button>
           </div>

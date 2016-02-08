@@ -156,7 +156,7 @@ class Accounts extends REST_Controller{
             }
         else{
             $error = 'Failed to Update';
-            $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST); 
+            $this->set_response($error, REST_Controller::HTTP_NOT_MODIFIED); 
         }
     }
 

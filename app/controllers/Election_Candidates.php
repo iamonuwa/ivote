@@ -6,7 +6,7 @@ class Election_Candidates extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('state_model');
+		$this->load->model(array('state_model','lga_model'));
 	}
 
 	public function getState()
