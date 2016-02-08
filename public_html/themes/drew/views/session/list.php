@@ -32,33 +32,110 @@ $election = json_decode(file_get_contents(base_url('api/elections/')));?>
 
 <section id="benefits" class="benefits-section section-gray section">
 
-				<div class="container">
+<!-- TEAM
+			================================= -->
+			<section id="team" class="team-section section">
+			<form>
 
-					<h2 class="section-heading text-center">Election</h2>
+				<div class="container-fluid">
+					
+					<h2 class="section-heading text-center">ELECTION</h2>
 
-					<div class="benefits-row row">
-					<select>
-					<?php foreach($candidates as $key => $value):
-						// echo '<option value='.$value->id.'>'.$value->surname.' '.$value->firstname.' '.$value->othername.'</option>';
-						echo '<option class="form-control" value='.$value->id.'>'.$value->name.'</option>';
-					endforeach;?>
-					</select>
+					<div class="team-row row">
 
-						<?php {?>
-						<div class="col-sm-3 col-md-3">
-						<a href="<?= base_url('elections/'.strtolower($value->name));?>">
-							<div class="benefit">
-								<span class="benefit-icon fa fa-rocket" data-animation="bounceIn"></span>
-								<h4 class="benefit-title"><?= $value->name;?></h4>
-								<!-- <p class="benefit-description">Kickstart your landing page in no time with the available layouts provided in the package. Change the content and launch! Yes it's as easy as like that.</p> -->
+						<!-- TEAM MEMBER 1 -->
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member">
+						<input type="radio" name="choice" value="candidate1">
+								<img class="team-member-picture" src="images/contents/team-member-1.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Jason Castillo</h4>
+									<div class="team-member-position">CEO &amp; Co-Founder</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
 							</div>
-							</a>
 						</div>
-						<?php } ?>
+
+						<!-- TEAM MEMBER 2 -->
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member even">
+						<input type="radio" name="choice" value="candidate2">
+								<img class="team-member-picture" src="images/contents/team-member-2.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Harold Kelly</h4>
+									<div class="team-member-position">CTO &amp; Co-Founder</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="hidden-md hidden-lg clear"></div>
+
+						<!-- TEAM MEMBER 3 -->
+
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member">
+						<input type="radio" name="choice" value="candidate3">
+								<img class="team-member-picture" src="images/contents/team-member-3.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Kathy Nelson</h4>
+									<div class="team-member-position">Graphic Designer</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="hidden-sm hidden-lg clear"></div>
+
+						<!-- TEAM MEMBER 4 -->
+
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member even">
+						<input type="radio" name="choice" value="candidate4">
+								<img class="team-member-picture" src="images/contents/team-member-4.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Dylan Fowler</h4>
+									<div class="team-member-position">UI/UX Designer</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="hidden-md hidden-lg clear"></div>
+
+						<!-- TEAM MEMBER 5 -->
+
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member">
+						<input type="radio" name="choice" value="candidate5">
+								<img class="team-member-picture" src="images/contents/team-member-5.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Carolyn Harvey</h4>
+									<div class="team-member-position">Development</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- TEAM MEMBER 6 -->
+
+						<div class="col-sm-6 col-md-4 col-lg-2" data-animation="fadeIn">
+							<div class="team-member even">
+						<input type="radio" name="choice" value="candidate6">
+								<img class="team-member-picture" src="images/contents/team-member-6.jpg" alt="">
+								<div class="team-member-text">
+									<h4 class="team-member-name">Diane Grant</h4>
+									<div class="team-member-position">Marketing &amp; Strategy</div>
+									<p class="team-member-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+								</div>
+							</div>
+						</div>
 
 					</div>
 
 				</div>
+			</form>
+			</section>
 
 				<?php 
 				?>
