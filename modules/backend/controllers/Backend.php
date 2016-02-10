@@ -7,6 +7,7 @@ class Backend extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('theme');
+		$this->load->model('election_model');
 		if(!$this->aauth->is_loggedin() || $this->aauth->is_member('Default')){
 			redirect(base_url('backend/login'),'refresh');
 		}
@@ -37,19 +38,35 @@ class Backend extends CI_Controller {
 	}
 	public function election_office()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+			$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('elections/offices/list');
+		}
 	}
 	public function election_voter_list()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('accounts/voters/list');
+		}
 	}
 	public function election_voter_registration()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('accounts/voters/add');
+		}
 	}
 	public function election_voter_modify()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('accounts/voters/edit');
+		}
 	}
 	public function election_account_list()
 	{
@@ -93,11 +110,19 @@ class Backend extends CI_Controller {
 	}
 	public function election_candidates()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('elections/candidates/list');
+		}
 	}
 	public function election_candidates_register()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('elections/candidates/add');
+			}
 	}
 	public function election_account_role_edit()
 	{
@@ -109,7 +134,11 @@ class Backend extends CI_Controller {
 	}
 	public function election_political_party()
 	{
+		if ($this->election_model->get_by('is_active', '1')) {
+		$this->load->view('restrictions/election_running');
+		}else{
 		$this->load->view('elections/parties/list');
+		}
 	}
 	public function web_settings()
 	{
@@ -119,6 +148,21 @@ class Backend extends CI_Controller {
 	{
 		$this->aauth->logout();
         redirect(base_url('backend/login'),'refresh');
+	}
+
+	public function messaging()
+	{
+		$this->load->view('mailer/index');
+	}
+
+		public function messaging_compose()
+	{
+		$this->load->view('mailer/create');
+	}
+
+	public function not_found()
+	{
+		show404();
 	}
 
 }

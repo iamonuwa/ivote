@@ -21,81 +21,46 @@ myApp.controller('navController', function ($scope){
     };
 
 });
+myApp.directive('datePicker', function($parse, $timeout){
+    return {
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        compile: function(element, attrs) {
+          return function (scope, slider, attrs, controller) {
+            $(attrs.selector).datepicker();
+          };
+        }
+    };
+});
 
-myApp.config(['$routeProvider',function ($routeProvider){
-        $routeProvider
-                .when('/',{
-                    title: 'backend',
-                    templateUrl: BASE_URL + 'backend/base'
-                })
-                .when('/voters',{
-                    title: 'Voters Management',
-                    templateUrl: BASE_URL + 'backend/election_voter_list'
-                })
-                .when('/candidates',{
-                    title: 'Candidates Management',
-                    templateUrl: BASE_URL + 'backend/election_candidates'
-                })
-                .when('/users',{
-                    title: 'Users Management',
-                    templateUrl: BASE_URL + 'backend/election_account_list'
-                })
-                .when('/locked-accounts',{
-                    title: 'Users Management',
-                    templateUrl: BASE_URL + 'backend/election_account_locked'
-                })
-                .when('/setup-election',{
-                    title: 'Start Election',
-                    templateUrl: BASE_URL + '/backend/election_settings'
-                })
-                .when('/party',{
-                    title: 'Political Party',
-                    templateUrl: BASE_URL + '/backend/election_political_party'
-                })
-                .when('/office', {
-                    title: 'Office',
-                    templateUrl: BASE_URL + '/backend/election_office'
-                })
-                .when('/roles',{
-                    title: 'Roles Management',
-                    templateUrl: BASE_URL + '/backend/election_account_role_list'
-                })
-                .when('/assign-permission',{
-                    title: 'Assign Permissions',
-                    templateUrl: BASE_URL + '/backend/election_account_role_edit'
-                })
-                .when('/permissions',{
-                    title: 'Permissions Management',
-                    templateUrl: BASE_URL + '/backend/election_account_permission_list'
-                })
-                .when('/register-voter',{
-                    title: 'Voter Registration',
-                    templateUrl: BASE_URL + 'backend/election_voter_registration'
-                })
-                .when('/modify-voter',{
-                    title: 'Modify Voter Registration',
-                    templateUrl: BASE_URL + 'backend/election_voter_modify'
-                })
-                .when('/profile',{
-                    title: 'My Profile',
-                    templateUrl: BASE_URL + 'backend/profile'
-                })
-                .when('/app-settings',{
-                    title: 'Application Settings',
-                    templateUrl: BASE_URL + 'backend/web_settings'
-                })
-                .when('/create-new',{
-                    title: 'New Candidate',
-                    templateUrl: BASE_URL + 'backend/election_candidates_register'
-                })
-                // .when('/logout',{
-                //     title: 'Logout User',
-                //     templateUrl: BASE_URL + 'backend/login'
-                // })
-                .otherwise({
-                    redirectTo: 'pages/notfound.html'
-                });
-    }]);
+myApp.directive('editorWYSIWYG', function($parse, $timeout){
+    return {
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        compile: function(element, attrs) {
+          return function (scope, slider, attrs, controller) {
+            $(attrs.selector).wysihtml5();
+          };
+        }
+    };
+});
+
+myApp.directive('inputMask', function($parse, $timeout){
+    return {
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        compile: function(element, attrs) {
+          return function (scope, slider, attrs, controller) {
+            $(attrs.selector).inputmask();
+          };
+        }
+    };
+});
+
+
 
 myApp.filter('startFrom', function() {
     return function(input, start) {
@@ -127,21 +92,16 @@ myApp.controller('loginCtrl', function ($scope, $http, $location){
 
 //Dashboard Controller
 myApp.controller('dashboardCtrl', function ($scope, $http) {
-    // $scope.getComputerName = function () {
-    //     $http.get(BASE_URL + 'dashboard/getComputerName').success(function (data) {
-    //         $scope.getComputer = data;
-    //     })
-    // }
-    // $scope.Browser  = function () {
-    //     $http.get(BASE_URL + 'dashboard/getBrowser').success(function (data) {
-    //         $scope.getActiveBrowser = data;
-    //     })
-    // }
-    // $scope.BrowserVersion = function  () {
-    //     $http.get(BASE_URL + 'dashboard/getBrowserVersion').success(function (data) {
-    //         $scope.getActiveBrowserVersion = data;
-    //     })
-    // }
+    $scope.getComputerName = function () {
+        $http.get(BASE_URL + 'dashboard/getComputerName').success(function (data) {
+            $scope.getComputer = data;
+        })
+    }
+    $scope.getIpAddress = function () {
+        $http.get(BASE_URL + 'dashboard/getIpAddress').success(function (data) {
+            $scope.getIP = data;
+        })
+    }
     $scope.getCurrentUser = function () {
             $http.get(BASE_URL + 'users/currentUser').success(function (data) {
                 $scope.CurrentUser = data;
@@ -159,6 +119,7 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
 
   //Retrieve from API
     $scope.getData = function() {
+        $('.overlay, .loading-img').show();
             $http.get(BASE_URL + "api/accounts/index/").success(function(data)
             {
         $scope.users = data;
@@ -168,6 +129,7 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
             });
+            $('.overlay, .loading-img').hide();
         }
     
     //Post to API
@@ -183,6 +145,7 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
                 'gender' : $scope.gender,
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
+                'picture': $scope.picture,
                 'email' : $scope.email,
                 'name' : randomString(7, "N")
                 // 'pass' : $scope.pass
@@ -191,10 +154,11 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
         .success(function (message) {
           toastr.success(message)
             $scope.reset();
-            console.log(message);
+            console.log($scope.picture);
             $route.reload();
         })
         .error(function (message){
+            console.log($scope.picture);
            toastr.warning(message)
         });
     }
@@ -210,66 +174,38 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
     }
 
     $scope.deleteData = function (index) {
-        // console.log(index);
         var x = confirm("Are you sure you want to block this account?");
      if(x){
         $http.delete(BASE_URL + "api/accounts/index/" + index)
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
         }
 
-    $scope.updateData = function () {
-            // console.log(item.surname);
-        $http.put(BASE_URL + "api/accounts/index/" + surname + "/" + firstname + "/" + othername + "/" + gender + "/" + phone)
+    $scope.getRoles = function() {
+        $http.get(BASE_URL + 'api/roles').success(function (data) {
+                $scope.roles = data;
+        });
+    }
+
+    $scope.updateData = function (id, surname, firstname, othername, dateofbirth, gender, phone) {
+        $http.put(BASE_URL + "api/accounts/index/" +  id + "/" + surname + "/" + firstname + "/" + othername + "/" + dateofbirth + "/" + gender + "/" + phone)
         .success(function (message) {
-            // toastr.success(message)
-            console.log(message)
+            toastr.success(message)
         })
         .error(function (message) {
             toastr.warning(message)
         })
     }
 
-    // $scope.updateData = function (index) {
-    //     // console.log(index)
-    //     // $http.put(BASE_URL + "api/accounts/index/" + index).success(function (message) {
-    //     //         console.log(message)
-    //     //     }).error(function (message) {
-    //     //         console.log(message)
-    //     //     });
-    //     var data = {
-    //             id          : index.id,
-    //             surname     : index.surname, 
-    //             firstname   : index.firstname, 
-    //             othername   : index.othername,
-    //             dateofbirth : index.dateofbirth,
-    //             gender      : index.gender,
-    //             phone       : index.phone,
-    //             occupation  : index.occupation,
-    //             email       : index.email
-    //     };
-
-    //     // console.log(data)
-    //     $http.put(BASE_URL + "api/accounts/index/" + data)
-    //     .success(function (message) {
-    //         // toastr.success(message)
-    //         console.log(message)
-    //     })
-    //     .error(function (message) {
-    //         toastr.warning(message)
-    //     })
-    // }
-});
+   });
 
 //Lock Controller
 myApp.controller('lockCtrl', function ($scope, $http, $route) {
@@ -292,19 +228,16 @@ myApp.controller('lockCtrl', function ($scope, $http, $route) {
             });
         }
        $scope.deleteData = function (index) {
-        // console.log(index);
         var x = confirm("Are you sure you want to unblock this account?");
      if(x){
         $http.delete(BASE_URL + "api/locked_accounts/index/" + index)
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -337,8 +270,6 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
      $scope.add = function() {
         var vm = this;
         $scope.data = [];
-        // $scope.pass = randomString(10);
-        // console.log($scope.media);
         $http.post(BASE_URL + 'api/voters/index/', 
             {
                 'surname'     : $scope.surname, 
@@ -348,16 +279,12 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
                 'gender' : $scope.gender,
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
-                // 'email' : $scope.email,
                 'name' : randomString(7, "N"),
                 'picture' : $scope.picture
-                // 'pass' : $scope.pass
             }
         )
         .success(function (message) {
           toastr.success(message)
-            // $scope.reset();
-            // $route.reload();
         })
         .error(function (message){
            toastr.warning(message)
@@ -375,19 +302,16 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
     }
 
     $scope.deleteData = function (index) {
-        console.log(index);
         var x = confirm("Are you sure you want to delete this?");
      if(x){
         $http.delete(BASE_URL + "api/voters/index/" + index)
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -396,7 +320,6 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
     $scope.updateData = function (surname, firstname, othername, dateofbirth, gender, phone, occupation, email) {
         $http.put(BASE_URL + "api/voters/index/" + surname + "/" + firstname + "/" + othername + "/" + dateofbirth + "/" + gender + "/" + phone + "/" + occupation + "/" + email, {cache:true})
         .success(function (message) {
-            // toastr.success(message)
             console.log(message)
         })
         .error(function (message) {
@@ -404,7 +327,6 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         })
     }
 });
-
 
 //Roles Controller
 myApp.controller('rolesCtrl', function ($scope, $http, $route) {
@@ -416,7 +338,6 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
     $scope.getData = function() {
             $http.get(BASE_URL + "api/roles/index/").success(function(data)
             {
-            // $scope.roles = data;    
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
@@ -439,22 +360,19 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
             toastr.warning(message)
         })
     }
-
-    $scope.getDataByRole = function (index) {
-        console.log(index)
-        // $http.get(BASE_URL + "api/permissions/index")
-        // .success(function (data) {
-        //     // console.log(index)
-        //     angular.element(document.getElementById("roleModal")).scope().item = data;
-        //     angular.element(document.getElementById("roleModal")).scope().role = index;
-        // })
-        // .error(function (data) {
-        // });
+     $scope.getDataByRole = function (index) {
+        $http.get(BASE_URL + "api/permissions/index")
+        .success(function (data) {
+            // console.log(index)
+            angular.element(document.getElementById("roleModal")).scope().item = data;
+            angular.element(document.getElementById("roleModal")).scope().role = index;
+        })
+        .error(function (data) {
+        });
     }
 
     $scope.checkboxSelection = function () {
         var selection = [];
-        // console.log(document.getElementById("test"));
         var chkBox = document.getElementById("checkBox");
         var chkBox_input = chkBox.length;
         for(var i=0; i<chkBox_input; i++) {
@@ -464,7 +382,6 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
     } 
     $scope.addPermToRole = function(index, data) {
         var selection = [];
-        // console.log(document.getElementById("test"));
         var chkBox = document.getElementById("checkBox");
         var chkBox_input = chkBox.length;
         for(var i=0; i<chkBox_input; i++) {
@@ -477,7 +394,6 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         $http.put(BASE_URL + "api/roles/index/" + id + "/" + name + "/" + definition)
         .success(function (message) {
             toastr.success(message)
-            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)
@@ -491,12 +407,10 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -513,7 +427,6 @@ myApp.controller('permissionsCtrl', function ($scope, $http, $route) {
 
     $scope.getData = function() {
         $http.get(BASE_URL + "api/permissions/index").success(function (data) {
-            // $scope.permissions = data;
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
@@ -521,8 +434,6 @@ myApp.controller('permissionsCtrl', function ($scope, $http, $route) {
         $scope.totalItems = $scope.pagedItems.length;
         });
     }
-
-
 
     $scope.addData = function () {
         $http.post(BASE_URL + "api/permissions/index",
@@ -542,7 +453,6 @@ myApp.controller('permissionsCtrl', function ($scope, $http, $route) {
         $http.put(BASE_URL + "api/permissions/index/" + id + "/" + name + "/" + definition)
         .success(function (message) {
             toastr.success(message)
-            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)
@@ -555,12 +465,10 @@ myApp.controller('permissionsCtrl', function ($scope, $http, $route) {
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -572,7 +480,6 @@ myApp.controller('permissionsCtrl', function ($scope, $http, $route) {
 myApp.controller('partiesCtrl', function ($scope, $http, $route) {
     $scope.getData = function () {
         $http.get(BASE_URL + "api/parties/index").success(function (data){
-            // $scope.parties = data;
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
@@ -606,8 +513,6 @@ myApp.controller('partiesCtrl', function ($scope, $http, $route) {
         $http.put(BASE_URL + "api/parties/index/" + id + "/" + name + "/" + slug + "/" + description)
         .success(function (message) {
             toastr.success(message);
-            $route.reload();
-            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)
@@ -621,12 +526,10 @@ myApp.controller('partiesCtrl', function ($scope, $http, $route) {
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -638,7 +541,6 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
     
     $scope.getData = function () {
     $http.get(BASE_URL + "api/office/index").success(function (data) {
-        // $scope.offices = data;
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
@@ -670,7 +572,6 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
         $http.put(BASE_URL + "api/office/index/" + id + "/" + name)
         .success(function (message) {
             toastr.success(message)
-            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)
@@ -683,12 +584,10 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -701,13 +600,11 @@ myApp.controller('officeCtrl', function ($scope, $http, $route) {
 myApp.controller('candidatesCtrl', function ($scope, $http) {
     $scope.getData = function() {
         $http.get(BASE_URL + 'api/candidates/index').success(function (data) {
-             // $scope.candidates = data;
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
-    // console.log($scope.pagedItems)
             })
     }
     $scope.getParties = function() {
@@ -732,28 +629,44 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         });
     }
 
-    $scope.addData = function () {
-        $http.post(BASE_URL + 'api/candidates/index',{
-            'surname'       : $scope.surname,
-            'firstname'     : $scope.firstname,
-            'othername'     : $scope.othername,
-            'dateofbirth'   : $scope.dateofbirth,
-            'gender'        : $scope.gender,
-            'party'         : $scope.party,
-            'office'        : $scope.office,
-            'education'     : $scope.education,
-            'state'         : $scope.state,
-            'constituency'  : $scope.constituency,
-            'phone'         : $scope.phone,
-            'email'         : $scope.email,
-            'picture'       : $scope.passport
-        }).success( function (message) {
-            toastr.success(message)
-            console.log($scope.passport)
-        }).error( function (message) {
-            toastr.warning(message)
-            console.log(message)
-        });
+    $scope.addData = function (file) {
+        // console.log($scope.holder);
+        // Form Upload
+
+// function MyCtrl ($scope) {
+//     $scope.data = {};
+//     $scope.add = function () {
+        var holder = document.getElementById('file').files[0],
+        r = new FileReader();
+        r.onloadend = function (e) {
+            // $scope.data = e.target.result;
+            console.log(e.target.result);
+        }
+            console.log(e.target.result);
+
+//         r.readAsBinaryString(holder);
+//     }
+// }
+        // $http.post(BASE_URL + 'api/candidates/index', {
+        //     'surname'       : $scope.surname,
+        //     'firstname'     : $scope.firstname,
+        //     'othername'     : $scope.othername,
+        //     'dateofbirth'   : $scope.dateofbirth,
+        //     'gender'        : $scope.gender,
+        //     'party'         : $scope.party,
+        //     'office'        : $scope.office,
+        //     'education'     : $scope.education,
+        //     'state'         : $scope.state,
+        //     'constituency'  : $scope.constituency,
+        //     'phone'         : $scope.phone,
+        //     'email'         : $scope.email,
+        //     'picture'       : $scope.picture
+        // }).success( function (message) {
+        //     toastr.success(message)
+        // }).error( function (message) {
+        //     toastr.warning(message)
+        //     console.log(message)
+        // });
     }
 
      $scope.editData = function (index) {
@@ -810,21 +723,19 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
 myApp.controller('electionCtrl', function ($scope, $http, $route) {
     $scope.getData = function() {
         $http.get(BASE_URL + 'api/elections/index').success(function (data) {
-             // $scope.candidates = data;
         $scope.pagedItems = data;    
         $scope.currentPage = 1; //current page
         $scope.entryLimit = 10; //max no of items to display in a page
         $scope.filteredItems = $scope.pagedItems.length; //Initially for no filter  
         $scope.totalItems = $scope.pagedItems.length;
-        // console.log($scope.pagedItems)
         })
     }
 
     $scope.editData = function (index) {
          angular.element(document.getElementById("editModal")).scope().item = index;
         };
-    $scope.updateData = function (id, title, category, election_date, duration) {
-        $http.put(BASE_URL + "api/elections/index/" + id  + "/" + title + "/" + category + "/" + election_date + "/" + duration)
+    $scope.updateData = function (id, title, category, election_date, duration, status) {
+        $http.put(BASE_URL + "api/elections/index/" + id  + "/" + title + "/" + category + "/" + election_date + "/" + duration + "/" + status)
         .success(function (message) {
             toastr.success(message)
         })
@@ -839,10 +750,10 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
             'title' : $scope.title,
             'category' : $scope.category,
             'election_date': $scope.election_date,
-            'duration' : $scope.duration
+            'duration' : $scope.duration,
+            'status' : $scope.status
         })
         .success( function (message) {
-            // $scope.reset();
             toastr.success(message);
             $scope.getData();
             $route.reload();
@@ -860,12 +771,10 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
         .success(function (message) {
             $scope.getData();
             toastr.success(message)
-            // alert(message);
         })
         .error(function (message) {
             $scope.getData();
             toastr.warning(message)
-            // alert(message)
         });
     }
         else{}
@@ -875,7 +784,6 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
 myApp.controller('profileCtrl', function ($scope, $http, $route) {
     $scope.getData = function() {
         $http.get(BASE_URL + 'users/currentUser').success(function (data) {
-             // $scope.candidates = data;
         $scope.user = data;    
         })
     }
@@ -894,7 +802,6 @@ myApp.controller('profileCtrl', function ($scope, $http, $route) {
         $http.put(BASE_URL + "api/accounts/index/" + index.id + "/" + index.surname + "/" + index.firstname + "/" + index.othername + "/" + index.dateofbirth + "/" + index.gender + "/" + index.phone )
         .success(function (message) {
             toastr.success(message)
-            // console.log(message)
         })
         .error(function (message) {
             toastr.warning(message)

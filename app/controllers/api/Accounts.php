@@ -94,21 +94,22 @@ class Accounts extends REST_Controller{
         $email = $data->email;
         $pass = generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds');
         $name = $data->name;
-        if(empty($data->surname)){
-            $error = 'Surnname is required';
-            $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
-        }
-        $create = $this->aauth->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,$email, $pass, $name);
-        if($create){
-        $success = 'Account Has Been Created';
-        $this->set_response($success, REST_Controller::HTTP_CREATED);            
-        $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
-        sms($phone, $message);
-        }
-        else{
-        $error = $this->aauth->print_errors();
-            $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        $picture = $data->picture;
+        // if(empty($data->surname)){
+        //     $error = 'Surnname is required';
+        //     $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
+        // }
+        // $create = $this->aauth->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,$email, $pass, $name, $picture);
+        // if($create){
+        // $success = 'Account Has Been Created';
+        // $this->set_response($success, REST_Controller::HTTP_CREATED);            
+        // $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
+        // sms($phone, $message);
+        // }
+        // else{
+        // $error = $this->aauth->print_errors();
+        //     $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+        // }
         // var_dump($create);
     }
 
@@ -142,12 +143,12 @@ class Accounts extends REST_Controller{
 
     public function index_put($id, $surname, $firstname, $othername, $dateofbirth, $gender, $phone)
     {
-        $data['surname'] = $surname;
-        $data['firstname'] = $firstname;
-        $data['othername'] = $othername;
-        $data['dateofbirth'] = $dateofbirth;
-        $data['gender'] = $gender;
-        $data['phone'] = $phone;
+        $data['surname'] = trim(e($surname));
+        $data['firstname'] = trim(e($firstname));
+        $data['othername'] = trim(e($othername));
+        $data['dateofbirth'] = trim(e($dateofbirth));
+        $data['gender'] = trim(e($gender));
+        $data['phone'] = trim(e($phone));
         // $update = $this->aauth->update_user($id, $surname, $firstname, $othername, $dateofbirth, $gender, $phone);
         $update = $this->users_model->update($id, $data);
         if($update){

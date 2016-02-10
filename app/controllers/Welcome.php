@@ -73,7 +73,7 @@ echo arrayToExcel($query, $fields, "Users");
 
 public function demo()
 {
-	var_dump($this->voter->list_voters());
+	echo decrypt_voter('7EKnCORRjWgn');
 }
 }
 // 1453839627

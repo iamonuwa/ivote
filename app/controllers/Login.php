@@ -9,34 +9,26 @@ class Login extends CI_Controller {
 	{
 		parent::__construct();
 	}
-	// public function index()
-	// {
-	// 	$this->theme->set(get_current_theme());
-	// 	$data = '';
-	// 	$this->theme->set_data('login',$data);
-	//   	$this->theme->load(); 
-	// }
-
 	public function authenticate()
 	{
 		$username = $this->input->post('id_number');
 		$password = $this->input->post('password');
 		if(empty($username) || empty($password)){
-			echo 'Error';
+			$this->session->set_flashdata('msg', "Fields cannot be empty");
 			if($this->router->fetch_module() ==' frontend'){
 		 		redirect(base_url(),'refresh');
 		 		}
 		 		elseif($this->router->fetch_module() =='backend'){
-		 		redirect(base_url('backend/login'),'refresh');
+		 		redirect(base_url('backend/admin'),'refresh');
 	 		}
 		}
 		elseif (!is_numeric($username)) {
-		 	echo 'ID Number must be numeric';
+		 	$this->session->set_flashdata('msg', "ID Number must be numeric");
 		 	if($this->router->fetch_module() ==' frontend'){
 		 		redirect(base_url(),'refresh');
 		 		}
 		 		elseif($this->router->fetch_module() =='backend'){
-		 		redirect(base_url('backend/login'),'refresh');
+		 		redirect(base_url('backend/admin'),'refresh');
 	 		}
 		 }
 		else{
@@ -45,21 +37,17 @@ class Login extends CI_Controller {
 		 			redirect(base_url('voter/'.$this->aauth->get_user()->name),'refresh');
 		 		}
 		 		else{
-		 			// var_dump($this->aauth->get_user()->name);
 		 			redirect(base_url('backend'),'refresh');
 		 		}
 		 	}
-		 	// // var_dump($this->aauth->login($username, $password, $remember = FALSE, $totp_code = NULL));
 		 	else{
-		 		$error = $this->aauth->print_errors();
+		 	$this->session->set_flashdata('msg', $this->aauth->print_errors());
 		 		if($this->router->fetch_module() ==' frontend'){
 		 		redirect(base_url(),'refresh');
 		 		}
 		 		elseif($this->router->fetch_module() =='backend'){
-		 		redirect(base_url('backend/login'),'refresh');
+		 		redirect(base_url('backend/admin'),'refresh');
 		 		}
-			// var_dump($this->aauth->print_errors());
-		 	
 		 	}
 		 }
 	}

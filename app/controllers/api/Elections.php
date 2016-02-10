@@ -99,12 +99,16 @@ class Elections extends REST_Controller{
     {
         $filter = json_decode(file_get_contents("php://input")); 
         $data['title'] = $filter->title;
+        // if($this->election_model->get_by('title', $filter->title)){
+        //     $error = 'Election already exists';
+        //      $this->set_response($error, REST_Controller::HTTP_CONFLICT);
+        // }else{
         $data['category'] = $filter->category;
         $data['election_date'] = $filter->election_date;
         $data['duration'] = $filter->duration;
         $data['created_by'] = $this->aauth->get_user()->name; 
         $data['date_created'] = date("F j, Y, g:i a", time());
-        $save = $this->election_model->insert($data);
+        $save = $this->election_model->insert($data, $skip_validate = FALSE);
         if($save){
         $success = $data['title'].' election has been Created';
         $this->set_response($success, REST_Controller::HTTP_CREATED);            
@@ -113,6 +117,7 @@ class Elections extends REST_Controller{
         $error = 'An Error has occured. Please try again later';
             $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
         }
+    // }
         // var_dump($filter->election_date);
     }
 
@@ -140,13 +145,14 @@ class Elections extends REST_Controller{
             }
         }
 
-    public function index_put($id, $title, $category, $election_date, $duration)
+    public function index_put($id, $title, $category, $election_date, $duration, $status)
     {
         $data['title'] = str_replace("%20", " ", $title);
-        $data['category'] = $category;
+        $data['category'] = str_replace("%20", " ", $category);
         $data['election_date'] = $election_date;
         $data['duration'] = str_replace("%20", " ", $duration);
         $data['created_by'] = $this->aauth->get_user()->name;
+        $data['is_active'] = $status;
         $update = $this->election_model->update($id, $data);
         if($update){
             $success = 'Election has been updated successfully';

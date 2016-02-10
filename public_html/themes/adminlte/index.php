@@ -1,6 +1,8 @@
 <?php if($this->aauth->is_loggedin()){
  get_header();?>
 <div ng-view="" id="ng-view" class="slide-animation"></div>
+  <div class="overlay"></div>
+            <div class="loading-img"></div>
 <?php get_footer();
 }else{
 	get_header();
@@ -9,9 +11,14 @@
     <div class="login-box">
       <div class="login-logo">
         <a href="<?= base_url('login');?>"><img src="<?= base_url('public_html/uploads/logo.png');?>"></a>
-      </div><!-- /.login-logo -->
+      </div>
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
+         <?php if($this->session->flashdata('msg') != ''){?>
+         <div class="callout callout-danger">
+              <h4>Login Failure</h4>
+              <?php echo $this->session->flashdata('msg');?>
+        </div><?php  }?>
         <form name="login" action="<?= base_url('login/authenticate');?>" method="post">
           <div class="form-group has-feedback">
             <input type="text" name="id_number" class="form-control" placeholder="ID Number">
@@ -23,15 +30,13 @@
           </div>
           <div class="row">
             <div class="col-xs-8">
-              
-            </div><!-- /.col -->
+            </div>
             <div class="col-xs-4">
               <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-            </div><!-- /.col -->
+            </div>
           </div>
         </form>
-  </div><!-- /.login-box-body -->
-    </div><!-- /.login-box -->
+  </div>
+    </div>
     <?php }
-
-    //get_footer();?>
+?>

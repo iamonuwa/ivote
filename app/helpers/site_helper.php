@@ -157,3 +157,10 @@ if (!function_exists('exportPDF'))
         $CI->mpdf->Output($fileName . '.pdf','D'); // D - Force download, I - View in explorer
     }
 }
+
+if(!function_exists('e')){
+    function e($string)
+    {
+        return htmlentities($string);
+    }
+}

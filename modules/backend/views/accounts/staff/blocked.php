@@ -4,11 +4,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard'); ?>
+            <small><?= $this->lang->line('control_panel'); ?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('control_panel'); ?></a></li>
             <!-- <li class="active">{{ title }}</li> -->
           </ol>
         </section>
@@ -17,7 +17,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title"> Staff Accounts Management (Deactivated)</h3>
+                  <h3 class="box-title"> <?= $this->lang->line('deactivated_accounts'); ?></h3>
                 
                 </div>
                 <div class="box">
@@ -47,12 +47,12 @@
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                        <th>Name</th>
-                        <th>ID Number</th>
-                        <th>Email Address</th>
-                        <th>Phone Number</th>
+                        <th><?= $this->lang->line('name');?></th>
+                        <th><?= $this->lang->line('id_number');?></th>
+                        <th><?= $this->lang->line('email_address');?></th>
+                        <th><?= $this->lang->line('phone_number');?></th>
                         <!-- <th>Gender</th> -->
-                        <th>Unit</th>
+                        <th><?= $this->lang->line('unit');?></th>
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -69,7 +69,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} deactivated accounts</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} <?= $this->lang->line('deactivated_accounts');?></div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>

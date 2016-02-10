@@ -4,11 +4,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard'); ?>
+            <small><?= $this->lang->line('control_panel'); ?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('home'); ?></a></li>
             <!-- <li class="active">{{ title }}</li> -->
           </ol>
         </section>
@@ -17,7 +17,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title"> Staff Accounts Management</h3>
+                  <h3 class="box-title"> <?= $this->lang->line('staff_accounts_management'); ?></h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -44,19 +44,30 @@
                   ><div class="col-sm-6">
                   <div class="dataTables_filter" id="datatables_filter">
                   <label>Search:<input aria-controls="datatables" placeholder="" ng-model="search" ng-change="filter()" class="form-control input-sm" type="search"></label>
-                    <a href="<?= base_url('welcome/test');?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> Export CSV</a>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-success">Export As </button>
+                      <button aria-expanded="true" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">CSV</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">PDF</a></li>
+                      </ul>
+                    </div>
                   </div></div></div>
                   <div class="row">
                   <div class="col-sm-12" ng-show="filteredItems > 0">
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                        <th>Name</th>
-                        <th>ID Number</th>
-                        <th>Email Address</th>
-                        <th>Phone Number</th>
+                        <th><?= $this->lang->line('name'); ?></th>
+                        <th><?= $this->lang->line('id_number'); ?></th>
+                        <th><?= $this->lang->line('email_address'); ?></th>
+                        <th><?= $this->lang->line('phone_number'); ?></th>
                         <!-- <th>Gender</th> -->
-                        <th>Unit</th>
+                        <th><?= $this->lang->line('unit'); ?></th>
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -75,7 +86,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} registered accounts</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} <?= $this->lang->line('registered_accounts'); ?></div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
@@ -84,7 +95,7 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Register New Account</button>
+                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_account'); ?></button>
 
                 </div>
                  <div class="pull-right"></div>
@@ -115,15 +126,15 @@
               <label ng-model="picture" id="image-holder" ></label>
           </div>
           <div class="col-xs-4">
-            <label for="surname" class="control-label">Surname</label>
+            <label for="surname" class="control-label"><?= $this->lang->line('surname');?></label>
             <input type="text" ng-model="surname" class="form-control" id="surname" placeholder="john" required>
           </div>
           <div class="col-xs-4">
-            <label for="firstame" class="control-label">Firstname</label>
+            <label for="firstame" class="control-label"><?= $this->lang->line('firstname');?></label>
             <input type="text" ng-model="firstname" class="form-control" id="firstname" placeholder="doe" required>
           </div>
           <div class="col-xs-4">
-            <label for="otherame" class="control-label">Othername</label>
+            <label for="otherame" class="control-label"><?= $this->lang->line('othername');?></label>
             <input type="text" ng-model="othername" class="form-control" id="othername" placeholder="cow" required>
           </div>
           </div>
@@ -132,19 +143,20 @@
             <div class="form-group">
             
                 <div class="col-xs-6">
-                <label for="dateofbirth" class="control-label">Date Of Birth</label>
+                <label for="dateofbirth" class="control-label"><?= $this->lang->line('dateofbirth');?></label>
                 <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-calender"></i>
                       </div>
-                      <input class="form-control" ng-model="dateofbirth" id="datemask" type="text" placeholder="dd/mm/yyyy" required>
+                      <input class="form-control datemask" ng-model="dateofbirth" id="date" type="text" placeholder="dd/mm/yyyy" required>
                     </div>
                 </div>
+                <div date-picker selector=".datemask" ></div>
             <div class="col-md-6">
-                    <label for="gender" class="control-label">Gender</label>
+                    <label for="gender" class="control-label"><?= $this->lang->line('gender');?></label>
                     <select ng-model="gender" class="form-control" required>
-                      <option value="MALE">MALE</option>
-                      <option value="FEMALE">FEMALE</option>
+                      <option value="<?= $this->lang->line('male');?>"><?= $this->lang->line('male');?></option>
+                      <option value="<?= $this->lang->line('female');?>"><?= $this->lang->line('female');?></option>
                     </select>
                   </div>
                 </div>
@@ -152,7 +164,7 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-6">
-            <label for="phone" class="control-label">Phone Number</label>
+            <label for="phone" class="control-label"><?= $this->lang->line('phone_number');?></label>
             <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
@@ -161,7 +173,7 @@
                     </div>
           </div>
           <div class="col-xs-6">
-            <label for="email" class="control-label">Email Address</label>
+            <label for="email" class="control-label"><?= $this->lang->line('email_address');?></label>
             <input type="text" ng-model="email" class="form-control" id="email" placehoder="johndoe@whatever.com" required>
           </div>
           </div>
@@ -169,7 +181,7 @@
            <div class="row">
           <div class="form-group">
           <div class="col-xs-6">
-            <label for="unit" class="control-label">Unit</label>
+            <label for="unit" class="control-label"><?= $this->lang->line('unit');?></label>
             <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-map-maker"></i>
@@ -187,8 +199,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="add()"><span class="gyphicon glyphicon-plus-sign"></span> Create Account</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="add()"><span class="gyphicon glyphicon-plus-sign"></span><?= $this->lang->line('create_new_account');?></button>
       </div>
     </div>
   </div>
@@ -200,22 +212,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">New Account for {{ item.surname }}  {{ item.firstname }} {{ item.othername }}</h4>
+        <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('modify_account_for');?> {{ item.surname }}  {{ item.firstname }} {{ item.othername }}</h4>
       </div>
       <div class="modal-body">
         <form name="addUser">
         <div class="row">
           <div class="form-group">
           <div class="col-xs-4">
-            <label for="surname" class="control-label">Surname</label>
+            <label for="surname" class="control-label"><?= $this->lang->line('surname');?></label>
             <input type="text" ng-model="item.surname" class="form-control" id="surname" ng-required>
           </div>
           <div class="col-xs-4">
-            <label for="firstame" class="control-label">Firstname</label>
+            <label for="firstame" class="control-label"><?= $this->lang->line('firstname');?></label>
             <input type="text" ng-model="item.firstname" class="form-control" id="firstname" required>
           </div>
           <div class="col-xs-4">
-            <label for="otherame" class="control-label">Othername</label>
+            <label for="otherame" class="control-label"><?= $this->lang->line('othername');?></label>
             <input type="text" ng-model="item.othername" class="form-control" id="othername" required>
           </div>
           </div>
@@ -223,19 +235,20 @@
           <div class="row">
             <div class="form-group">
                 <div class="col-xs-6">
-                <label for="dateofbirth" class="control-label">Date Of Birth</label>
+                <label for="dateofbirth" class="control-label"><?= $this->lang->line('dateofbirth');?></label>
                 <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-clock-o"></i>
                       </div>
-                      <input class="form-control pull-right" id="dateofbirth" ng-model="item.dateofbirth" type="text" required>
+                      <input class="form-control datemask pull-right" id="date" ng-model="item.dateofbirth" type="text" required>
                     </div>
                 </div>
+                <div date-picker selector=".datemask" ></div>
             <div class="col-md-6">
-                    <label for="gender" class="control-label">Gender</label>
+                    <label for="gender" class="control-label"><?= $this->lang->line('gender');?></label>
                     <select ng-model="item.gender" class="form-control" required>
-                      <option value="MALE">MALE</option>
-                      <option value="FEMALE">FEMALE</option>
+                      <option value="MALE">Male</option>
+                      <option value="FEMALE">Female</option>
                     </select>
                   </div>
                 </div>
@@ -243,7 +256,7 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-6">
-            <label for="phone" class="control-label">Phone Number</label>
+            <label for="phone" class="control-label"><?= $this->lang->line('phone_number');?></label>
             <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
@@ -252,16 +265,22 @@
                     </div>
           </div>
           <div class="col-xs-6">
-            <label for="email" class="control-label">Email Address</label>
+            <label for="email" class="control-label"><?= $this->lang->line('email_address');?></label>
             <input type="text" ng-model="item.email" class="form-control" id="email" required>
+          </div>
+          <div class="col-xs-6">
+            <label for="role" class="control-label">Assign Group</label>
+            <select ng-model="role" class="form-control" ng-init="getRoles()">
+              <option ng-repeat="role in roles" value="{{role.name}}">{{role.name}}</option>
+            </select>
           </div>
           </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" ng-click="updateData(item.surname,item.firstname,item.othername,item.gender,item.phone)"><span class="gyphicon glyphicon-edit"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" ng-click="updateData(item.id,item.surname,item.firstname,item.othername,item.dateofbirth,item.gender,item.phone)"><span class="gyphicon glyphicon-edit"></span> <?= $this->lang->line('save_changes');?></button>
       </div>
     </div>
   </div>

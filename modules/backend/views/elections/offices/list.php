@@ -4,11 +4,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard');?>
+            <small><?= $this->lang->line('control_panel');?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('home');?></a></li>
             <!-- <li class="active">{{ title }}</li> -->
           </ol>
         </section>
@@ -17,7 +17,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Contestable Positions Registration</h3>
+                  <h3 class="box-title"><?= $this->lang->line('contestable_position_registration');?></h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -50,9 +50,9 @@
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                       <th colspan="1" rowspan="1" class="sorting_disabled">Office</th>
-                      <th colspan="1" rowspan="1" class="sorting_disabled">Registered By</th>  
-                      <th colspan="1" rowspan="1" class="sorting_disabled">Last Modified</th>
+                       <th colspan="1" rowspan="1" class="sorting_disabled"><?= $this->lang->line('office');?></th>
+                      <th colspan="1" rowspan="1" class="sorting_disabled"><?= $this->lang->line('created_by');?></th>  
+                      <th colspan="1" rowspan="1" class="sorting_disabled"><?= $this->lang->line('last_modified_date');?></th>
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -68,7 +68,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} registered positions</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} <?= $this->lang->line('registered_offices');?></div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
@@ -77,7 +77,7 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Create New Position</button>
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_position');?></button>
                 </div>
                  <div class="pull-right"></div>
                 </div>
@@ -92,7 +92,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">New Position</h4>
+        <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('create_new_position');?></h4>
       </div>
       <div class="modal-body">
         <form name="add">
@@ -100,7 +100,7 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-12">
-            <label for="title" class="control-label">Title</label>
+            <label for="title" class="control-label"><?= $this->lang->line('title');?></label>
              <input type="text" ng-model="name" class="form-control" id="title" required>
           </div>
           </div>
@@ -108,8 +108,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Create Position</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()">
+        <span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_position');?></button>
       </div>
     </div>
   </div>
@@ -127,14 +128,15 @@
       <div class="modal-body">
         <form name="addPermission">
         <div class="form-group">
-          <label>Office</label>
+          <label><?= $this->lang->line('title');?></label>
           <input type="text" ng-model="item.name" class="form-control">
         </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="getData()" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" ng-click="updateData(item.id, item.name)"><span class="glyphicon glyphicon-edit"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" ng-click="getData()" data-dismiss="modal"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" ng-click="updateData(item.id, item.name)">
+        <span class="glyphicon glyphicon-edit"></span> <?= $this->lang->line('save_changes');?></button>
       </div>
     </div>
   </div>

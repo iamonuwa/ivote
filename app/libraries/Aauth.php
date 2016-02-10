@@ -711,7 +711,7 @@ class Aauth {
 	 * @param string $name User's name
 	 * @return int|bool False if create fails or returns user id if successful
 	 */
-	public function create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation, $email, $pass, $name) {
+	public function create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation, $email, $pass, $name, $picture) {
 
 		$valid = TRUE;
 
@@ -755,7 +755,8 @@ class Aauth {
 			'dateofbirth'=>$dateofbirth,
 			'occupation'=>$occupation,
 			'phone'=>$phone,
-			'gender'=>$gender
+			'gender'=>$gender,
+			'picture'=>$picture
 		);
 
 		if ( $this->aauth_db->insert($this->config_vars['users'], $data )){

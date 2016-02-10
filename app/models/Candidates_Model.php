@@ -36,6 +36,55 @@ class Candidates_Model extends MY_Model{
     protected $soft_delete_key = 'deleted';
     protected $_temporary_with_deleted = FALSE;
     protected $_temporary_only_deleted = FALSE;
+
+    // public $validate = array(
+    //         'surname' => array( 'field' => 'surname', 
+    //                'label' => 'Surname',
+    //                'rules' => 'trim|required|xss_clean'
+    //                 ),
+    //         'firstname' => array( 'field' => 'firstname', 
+    //                'label' => 'Firstname',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'othername' => array( 'field' => 'othername', 
+    //                'label' => 'Othername',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'dateofbirth' => array( 'field' => 'dateofbirth', 
+    //                'label' => 'Date Of Birth',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'gender' => array( 'field' => 'gender', 
+    //                'label' => 'Gender',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'party' => array( 'field' => 'party', 
+    //                'label' => 'Party',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'education' => array( 'field' => 'education', 
+    //                'label' => 'Education',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'state' => array( 'field' => 'state', 
+    //                'label' => 'State',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'constituency' => array( 'field' => 'constituency', 
+    //                'label' => 'Constituency',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'phone' => array( 'field' => 'phone', 
+    //                'label' => 'Phone Number',
+    //                'rules' => 'trim|required|xss_clean'
+    //                ),
+    //         'email' => array (
+    //                 'field' => 'email',
+    //                 'label' => 'email',
+    //                 'rules' => 'trim|required|valid_email|callback__unique_email|xss_clean'
+    //         )
+    //     );
+       
     
     public function __construct() {
         parent::__construct();

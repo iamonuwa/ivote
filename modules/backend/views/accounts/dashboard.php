@@ -57,21 +57,118 @@
             </div><!-- /.col -->
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">System Information</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <ul class="nav nav-pills nav-stacked">
-                    <li> <a href="#" ng-init="getCurrentUser()"> ID Number: {{CurrentUser.name}}</a></li>
-                    <li> <a href="#" ng-init="getCurrentUser()"> Last Login: {{CurrentUser.last_login}}</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
-                    <li> <a href="#"> Computer Name:</a></li>
+                    <li> <a href="javascript:void(0)" ng-init="getCurrentUser()"> ID Number: {{CurrentUser.name}}</a></li>
+                    <li> <a href="javascript:void(0)" ng-init="getCurrentUser()"> Last Login: {{CurrentUser.last_login}}</a></li>
+                    <li> <a href="javascript:void(0)" ng-init="getCurrentUser()"> Computer: {{ getComputer }}</a></li>
+                    <li> <a href="javascript:void(0)" ng-init="getIpAddress()"> IP Address: {{ getIP }}</a></li>
                   </ul>
                 </div><!-- /.box-body -->
+              </div><!-- /.box -->
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Quick Links</h3>  
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <ul class="products-list product-list-in-box">
+                    <li class="item">
+                      <div class="product-info">
+                        <a href="javascript::;" class="product-title">Send Message</a>
+                        <span class="product-description">
+                        Send message to Commission. Message can be a complaint, discovered.
+                        </span>
+                      </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                      <div class="product-info">
+                        <a href="#/profile" class="product-title">Update Profile</a>
+                        <span class="product-description">
+                        Edit your profile account
+                        </span>
+                      </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                      <div class="product-info">
+                        <a href="javascript::;" data-toggle="modal" data-target="#password_reset" ng-click="editData(data)" class="product-title">Password Reset</a>
+                        <span class="product-description">
+                        Change your password
+                        </span>
+                      </div>
+                    </li><!-- /.item -->
+                  </ul>
+                </div><!-- /.box-body -->
+              </div>
+            </div><!-- /.col (left) -->
+
+             <div class="col-md-4">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">INEC News Feeds</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <ul class="products-list product-list-in-box">
+                    <li class="item">
+                      <div class="product-info">
+                        <a href="javascript::;" class="product-title">Samsung TV </a>
+                        <span class="product-description">
+                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div><!-- /.box-body -->
+              </div>
               </div><!-- /.box -->
             </div><!-- /.col (left) -->
           </div>
         </section>
+<div class="modal fade" id="password_reset" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="dashboardCtrl">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="ModalLabel">Reset Password</h4>
+      </div>
+      <div class="modal-body">
+        <form name="add">
+         
+        <div class="row">
+          <div class="form-group">
+          <div class="col-xs-12">
+            <label for="title" class="control-label">Old Password</label>
+             <input type="password" ng-model="item.password" class="form-control" required>
+          </div>
+          
+           <div class="col-xs-12">
+            <label for="duration" class="control-label">New Password</label>
+            <input type="password" ng-model="password" class="form-control" required>
+          </div>
+
+           <div class="col-xs-12">
+            <label for="duration" class="control-label">Confirm Password</label>
+            <input type="password" ng-model="c_password" class="form-control" required>
+          </div>
+         
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateData(item.password, password, c_password)"><span class="gyphicon glyphicon-plus-sign"></span> Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

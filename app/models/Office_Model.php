@@ -22,7 +22,13 @@ class Office_Model extends MY_Model {
      */
 //    protected $return_type = 'array';
 
-    // public belongs_to = array('user' => array('model' => 'users_model'))
+    // public belongs_to = array('user' => array('model' => 'users_model')) 
+         // public $validate = array(
+         //     array( 'field' => 'name', 
+         //           'label' => 'Position Title',
+         //           'rules' => 'required'
+         //            )
+         //     );
     public function __construct()
     {
     	parent::__construct();

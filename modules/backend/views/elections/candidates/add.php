@@ -17,11 +17,11 @@
                 <div class="box-header with-border">
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" name="addCandidate" novalidate>
                   <div class="box-body">
                     <div class="form-group">
                     <div class="col-xs-12 text-center">
-              <label ng-model="passport" id="image-holder" ></label>
+              <label ng-model="picture" id="image-holder" ></label>
                     </div>
                       <div class="col-xs-4">
                         <label for="surname" class="control-label">Surname</label>
@@ -44,8 +44,9 @@
                           <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                           </div>
-                          <input class="form-control pull-right" id="dateofbirth" ng-model="dateofbirth" type="text">
+                          <input class="form-control pull-right datemask" id="date" ng-model="dateofbirth" type="text">
                         </div>
+                          <div date-picker selector=".datemask" ></div>
                     </div>
                 <div class="col-md-6">
                         <label for="gender" class="control-label">Gender</label>
@@ -56,7 +57,7 @@
                       </div>
                     </div>
                      <div class="form-group">
-    <div class="col-xs-6">
+                <div class="col-xs-6">
                     <label>Select Political Party</label>
                    <select ng-model="party" class="form-control" ng-init="getParties()">
                           <option ng-repeat="party in parties" value="{{party.name}}">{{party.name}}</option>
@@ -100,7 +101,8 @@
                           <div class="input-group-addon">
                             <i class="fa fa-phone"></i>
                           </div>
-                          <input type="text" ng-model="phone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                          <input type="text" ng-model="phone" class="form-control" id="phone" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                          <div input-mask selector=".phone" ></div>
                         </div>
               </div>
               <div class="col-xs-6">
@@ -109,7 +111,7 @@
               </div>
               </div>
               <div class="col-xs-6">
-            <input id="fileUpload" type="file" />
+            <input id="file" type="file" />
             <br>
             <button type="button" class="btn btn-default" id="image_alt"> <span class="fa fa-upload"></span>Upload Passport</button>
           </div>

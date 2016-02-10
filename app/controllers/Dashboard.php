@@ -21,6 +21,10 @@ class Dashboard extends CI_Controller {
 	{
 		echo json_encode($this->user_agent->version());
 	}
+	public function getIpAddress()
+	{
+		echo json_encode($this->input->ip_address());
+	}
 	function test()
 	{
 		echo $this->user_agent();

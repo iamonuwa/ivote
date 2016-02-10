@@ -4,11 +4,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard');?>
+            <small><?= $this->lang->line('control_panel');?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('home');?></a></li>
             <!-- <li class="active">{{ title }}</li> -->
           </ol>
         </section>
@@ -17,7 +17,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Political Parties Management</h3>
+                  <h3 class="box-title"><?= $this->lang->line('political_parties_management');?></h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -50,9 +50,9 @@
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                      <th>Party</th>
-                      <th>Registered By</th>
-                      <th>Last Modified</th>
+                      <th><?= $this->lang->line('party');?></th>
+                      <th><?= $this->lang->line('created_by');?></th>
+                      <th><?= $this->lang->line('last_modified_date');?></th>
                     </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -69,7 +69,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} registered parties</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} <?= $this->lang->line('registered_parties');?></div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
@@ -78,7 +78,8 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Register New Party</button>
+                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+                   <span class="glyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_party');?></button>
                    
                 </div>
                  <div class="pull-right"></div>
@@ -94,27 +95,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">Register New Party</h4>
+        <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('create_new_party');?></h4>
       </div>
       <div class="modal-body">
         <form name="add">
         <div class="form-group">
-          <label>Party Name</label>
+          <label><?= $this->lang->line('party');?></label>
           <input type="text" ng-model="name" class="form-control">
         </div>
         <div class="form-group">
-          <label>Party Slug</label>
+          <label><?= $this->lang->line('party_slug');?></label>
           <input type="text" ng-model="slug" class="form-control">
         </div>
         <div class="form-group">
-                      <label>Party Slogan</label>
+                      <label><?= $this->lang->line('party_slogan');?></label>
                       <textarea class="form-control" ng-model="definition" rows="3" placeholder="What is Party's Motto?"></textarea>
                     </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getParties()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Register New Party</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getParties()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_party');?></button>
       </div>
     </div>
   </div>
@@ -130,15 +131,15 @@
       <div class="modal-body">
         <form name="add">
         <div class="form-group">
-          <label>Party Name</label>
+          <label><?= $this->lang->line('party');?></label>
           <input type="text" ng-model="item.name" class="form-control">
         </div>
         <div class="form-group">
-          <label>Party Slug</label>
+          <label><?= $this->lang->line('party_slug');?></label>
           <input type="text" ng-model="item.slug" class="form-control">
         </div>
         <div class="form-group">
-                      <label>Party Slogan</label>
+                      <label><?= $this->lang->line('party_slogan');?></label>
                       <textarea class="form-control" ng-model="item.description" rows="3" placeholder="What is Party's Motto?"></textarea>
                     </div>
 
@@ -146,8 +147,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success"  data-dismiss="modal" ng-click="updateData(item.id, item.name, item.slug, item.description)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success"  data-dismiss="modal" ng-click="updateData(item.id, item.name, item.slug, item.description)"><span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('save_changes');?></button>
       </div>
     </div>
   </div>

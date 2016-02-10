@@ -22,6 +22,12 @@ class Election_Model extends MY_Model {
      */
    protected $return_type = 'array';
 
+   // public $validate = array(
+   //                array( 'field' => 'title', 
+   //                 'label' => 'Election Title',
+   //                 'rules' => 'required' )
+   //      );
+
 	public function __construct()
 	{
 		parent::__construct();

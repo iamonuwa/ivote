@@ -75,4 +75,26 @@
     }
   }
 
+  if (!function_exists('app_version')) {
+    function app_version()
+    {
+      if(is_null(VERSION)){
+        return FALSE;
+      }else{
+        return VERSION;
+      }
+    }
+  }
+
+  if (!function_exists('copyright')) {
+    function copyright()
+    {
+        if(is_null(COPYRIGHT)){
+        return FALSE;
+      }else{
+        return  "<strong>Copyright &copy;".date('Y')." ".COPYRIGHT." </strong> All rights reserved.";
+      }
+    }
+  }
+
 ?>

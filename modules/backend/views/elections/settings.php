@@ -1,15 +1,12 @@
 
-<!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard');?>
+            <small><?= $this->lang->line('control_panel');?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <!-- <li class="active">{{ title }}</li> -->
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('home');?></a></li>
           </ol>
         </section>
         <div class="content">
@@ -17,7 +14,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Elections Management</h3>
+                  <h3 class="box-title"><?= $this->lang->line('elections_management');?></h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -50,13 +47,13 @@
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                        <th>Title</th>
-                        <th>Type</th>
-                        <th>Election Date</th>
-                        <th>Created By</th>
-                        <th>Status</th>
-                        <th>Date Created</th>
-                        <th>Last Modified Date</th>
+                        <th><?= $this->lang->line('title');?></th>
+                        <th><?= $this->lang->line('type');?></th>
+                        <th><?= $this->lang->line('election_date');?></th>
+                        <th><?= $this->lang->line('created_by');?></th>
+                        <!-- <th>Status</th> -->
+                        <th><?= $this->lang->line('date_created');?></th>
+                        <th><?= $this->lang->line('last_modified_date');?></th>
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -65,11 +62,11 @@
                         <td>{{ data.category }}</td>
                         <td>{{ data.election_date }}</td>
                         <td>{{ data.created_by }}</td>
-                        <td>{{ data.is_active }}</td>
+                        <!-- <td>{{ data.is_active }}</td> -->
                         <td>{{ data.date_created }}</td>
                         <td>{{ data.last_update }}</td>
-                        <td>  <button class="btn btn-sm btn-success" data-toggle="modal" ng-show="!data.is_active == 1" data-target="#editModal" ng-click="editData(data)" title="Modify Election" ><span class="glyphicon glyphicon-edit"></span></button> 
-                        <button type="submit" class="btn btn-sm btn-danger" ng-show="!data.is_active == 1" ng-click="deleteData(data.id)" name="unblock" title="Remove Election"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(data)" name="print" title="Print Election Details"><span class="glyphicon glyphicon-print"></span></button></td>
+                        <td>  <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(data)" title="Modify Election" ><span class="glyphicon glyphicon-edit"></span></button> 
+                        <button type="submit" class="btn btn-sm btn-danger" ng-hide="data.is_active == 1" ng-click="deleteData(data.id)" name="unblock" title="Remove Election"><span class="glyphicon glyphicon-trash"></span></button>
                       </tr>
                       </tbody>
                   </table></div></div>
@@ -84,7 +81,8 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Start New Election</button>
+                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+                   <span class="glyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('start_new_election');?></button>
                 </div>
                  <div class="pull-right"></div>
                 </div>
@@ -94,12 +92,12 @@
         </section>
       </div>
       </div>
-       <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="electionCtrl">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" ng-controller="electionCtrl">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">New Election</h4>
+        <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('start_new_election');?></h4>
       </div>
       <div class="modal-body">
         <form name="add">
@@ -107,11 +105,11 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-6">
-            <label for="title" class="control-label">Election Title</label>
+            <label for="title" class="control-label"><?= $this->lang->line('title');?></label>
              <input type="text" ng-model="title" class="form-control" id="title" required>
           </div>
           <div class="col-xs-6">
-            <label for="title" class="control-label">Election Category</label>
+            <label for="title" class="control-label"><?= $this->lang->line('election_category');?></label>
             <select ng-model="category" class="form-control" required>
                       <option value="GENERAL ELECTIONS">GENERAL ELECTIONS</option>
                       <option value="BYE-ELECTION">BYE-ELECTION</option>
@@ -119,12 +117,13 @@
             </select>
           </div>
           <div class="col-xs-8">
-            <label for="election_date" class="control-label">Date of Election</label>
-            <input type="text" ng-model="election_date" class="form-control" id="date" required>
+            <label for="election_date" class="control-label"><?= $this->lang->line('election_date');?></label>
+            <input type="text" ng-model="election_date" class="form-control datemask" id="date">
           </div>
+          <div date-picker selector=".datemask" ></div>
            <div class="col-xs-4">
-            <label for="duration" class="control-label">Duration</label>
-            <input type="text" ng-model="duration" class="form-control" id="date" required>
+            <label for="duration" class="control-label"><?= $this->lang->line('duration');?></label>
+            <input type="text" ng-model="duration" class="form-control" required>
           </div>
           </div>
           </div>
@@ -152,11 +151,11 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-6">
-            <label for="title" class="control-label">Election Title</label>
+            <label for="title" class="control-label"><?= $this->lang->line('title');?></label>
              <input type="text" ng-model="item.title" class="form-control" id="title" required>
           </div>
           <div class="col-xs-6">
-            <label for="title" class="control-label">Election Category</label>
+            <label for="title" class="control-label"><?= $this->lang->line('election_category');?></label>
             <select ng-model="item.category" class="form-control" required>
                       <option value="GENERAL ELECTIONS">GENERAL ELECTIONS</option>
                       <option value="BYE-ELECTION">BYE-ELECTION</option>
@@ -164,20 +163,28 @@
             </select>
           </div>
           <div class="col-xs-8">
-            <label for="election_date" class="control-label">Date of Election</label>
-            <input type="text" ng-model="item.election_date" class="form-control" id="date" required>
+            <label for="election_date" class="control-label"><?= $this->lang->line('election_date');?></label>
+            <input type="text" ng-model="item.election_date" class="form-control datemask" id="date">
           </div>
+          <div date-picker selector=".datemask" ></div>
            <div class="col-xs-4">
-            <label for="duration" class="control-label">Duration</label>
+            <label for="duration" class="control-label"><?= $this->lang->line('duration');?></label>
             <input type="text" ng-model="item.duration" class="form-control" id="date" required>
+          </div>
+          <div class="col-xs-4">
+          <label class="control-label"><?= $this->lang->line('status');?></label>
+          <select ng-model="item.is_active" class="form-control" ng-selected = "item.is_actve">
+            <option value="1">Activate</option>
+            <option value="0">Deactivate</option>
+          </select>
           </div>
           </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateData(item.id, item.title, item.category, item.election_date, item.duration)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateData(item.id, item.title, item.category, item.election_date, item.duration, item.is_active)"><span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('save_changes');?></button>
       </div>
     </div>
   </div>

@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','theme','aauth','fingerprint','voter','user_agent');
+$autoload['libraries'] = array('database','theme','aauth','fingerprint','voter','user_agent','form_validation');
 
 /*
 | -------------------------------------------------------------------
@@ -83,7 +83,7 @@ $autoload['drivers'] = array('cache');
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','theme','site','form');
+$autoload['helper'] = array('url','theme','site','form','mdes');
 
 /*
 | -------------------------------------------------------------------
@@ -111,7 +111,7 @@ $autoload['config'] = array('aauth','twilio');
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
-$autoload['language'] = array();
+$autoload['language'] = array('site');
 
 /*
 | -------------------------------------------------------------------

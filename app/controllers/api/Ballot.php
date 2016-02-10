@@ -80,19 +80,10 @@ class Ballot extends REST_Controller{
         }
     }
 
-    public function index_post($message)
+    public function index_post()
     {
-//         $email = 'admin@admin.com';
-//         $pass = '123456';
-//         $name = '15286';
-//         $this->auth->create_ballot($email, $pass, $name);
-        // $message = [
-        //      'email' => 'i_onuwa4u@outlook.com',
-        //         'pass' => 'Beautiful4u',
-        //                 'name' => '15286'
-        // ];
-
-        $this->set_response($message, REST_Controller::HTTP_CREATED);
+        echo "Hello World";
+        // $this->set_response($message, REST_Controller::HTTP_CREATED);
     }
 
     public function index_delete($id)

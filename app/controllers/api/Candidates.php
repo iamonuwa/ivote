@@ -85,12 +85,12 @@ class Candidates extends REST_Controller{
         $data = json_decode(file_get_contents("php://input"));
         $data->date_created = date("F j, Y, g:i a", time()); 
         // var_dump($data);
-        $create = $this->candidates_model->insert($data);
+        $create = $this->candidates_model->insert($data, $skip_validation = FALSE);
         if($create){
         $success = 'Candidate Has Been Registered';
         $this->set_response($success, REST_Controller::HTTP_CREATED);            
-        $message = "Your Registration was successfully, we wish you best of luck";
-        sms($phone, $message);
+        // $message = "Your Registration was successfully, we wish you best of luck";
+        // sms($phone, $message);
         }
         else{
         $error = $this->aauth->print_errors();

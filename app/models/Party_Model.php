@@ -22,6 +22,21 @@ class Party_Model extends MY_Model {
      */
 //    protected $return_type = 'array';
 
+         public $validate = array(
+                array( 'field' => 'name', 
+                   'label' => 'Party Title',
+                   'rules' => 'required' ),
+                array( 'field' => 'slug', 
+                   'label' => 'Party abbreviation',
+                   'rules' => 'required' 
+                   ),
+                array( 'field' => 'description', 
+                   'label' => 'Party Definition',
+                   'rules' => 'required' 
+                   )
+        );
+
+
 	public function __construct()
 	{
 		parent::__construct();

@@ -4,11 +4,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $this->lang->line('dashboard');?>
+            <small><?= $this->lang->line('control_panel'); ?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> <?= $this->lang->line('home'); ?></a></li>
             <!-- <li class="active">{{ title }}</li> -->
           </ol>
         </section>
@@ -17,7 +17,7 @@
 <section class="content">
   <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">RBAC Manager</h3>
+                  <h3 class="box-title"><?= $this->lang->line('rbac');?></h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -50,8 +50,8 @@
                   <table class="table table-bordered table-striped dataTable no-footer">
                     <thead>
                       <tr role="row">
-                        <th>Name</th>
-                        <th>Definition</th>
+                        <th><?= $this->lang->line('title'); ?></th>
+                        <th><?= $this->lang->line('definition'); ?></th>
                       </tr>
                     </thead>
                     <tbody ng-init="getData()">
@@ -59,7 +59,7 @@
                         <td>{{ role.name }}</td>
                         <td>{{ role.definition }}</td>
                         <td> 
-                        <a ng-href="#assign-permission" ng-click="getDataByRole(role)" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cog"></span></a>
+                        <button type="submit" class="btn btn-sm btn-primary" ng-click="getDataByRole(role)" data-toggle="modal" data-target="#roleModal" name="edit"> <span class="glyphicon glyphicon-cog"></span></a> 
                            <button type="submit" class="btn btn-sm btn-success" ng-click="editData(role)" data-toggle="modal" data-target="#editModal" name="edit"><span class="glyphicon glyphicon-edit"></span> </button> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(role.id)" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
                         </td>
                       </tr>
@@ -67,7 +67,7 @@
                   </table></div></div>
                   <div class="row">
                   <div class="col-sm-5">
-                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} registered roles</div>
+                  <div aria-live="polite" role="status" id="datatables_info" class="dataTables_info">{{ totalItems}} <?= $this->lang->line('created_roles'); ?></div>
                   </div><div class="col-sm-7">
                   <div id="datatables_paginate" class="dataTables_paginate paging_simple_numbers">
                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>
@@ -76,7 +76,7 @@
 
                 <div class="box-footer clearfix">
                 <div class="btn-group">
-                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> Create New Role</button>
+                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_role'); ?></button>
                    
                 </div>
                  <div class="pull-right"></div>
@@ -92,24 +92,24 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ModalLabel">New Role</h4>
+        <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('create_new_role');?></h4>
       </div>
       <div class="modal-body">
         <form name="addPermission">
         <div class="form-group">
-          <label>Role</label>
+          <label><?= $this->lang->line('title'); ?></label>
           <input type="text" ng-model="name" class="form-control">
         </div>
         <div class="form-group">
-                      <label>Role Definition</label>
+                      <label><?= $this->lang->line('definition'); ?></label>
                       <textarea class="form-control" ng-model="definition" rows="3" placeholder="Describe Role"></textarea>
                     </div>
        
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Create New Role</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close'); ?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('create_new_role'); ?></button>
       </div>
     </div>
   </div>
@@ -125,19 +125,19 @@
       <div class="modal-body">
         <form name="addPermission">
         <div class="form-group">
-          <label>Role</label>
+          <label><?= $this->lang->line('title'); ?></label>
           <input type="text" ng-model="item.name" class="form-control">
         </div>
         <div class="form-group">
-                      <label>Role Definition</label>
+                      <label><?= $this->lang->line('definition'); ?></label>
                       <textarea class="form-control" ng-model="item.definition" rows="3" placeholder="Describe Role"></textarea>
                     </div>
        
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateData(item.id, item.name, item.definition)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close'); ?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateData(item.id, item.name, item.definition)"><span class="gyphicon glyphicon-plus-sign"></span> <?= $this->lang->line('save_changes'); ?></button>
       </div>
     </div>
   </div>
@@ -163,8 +163,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit()"><span class="fa fa-plus-sign"></span> Save Changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close'); ?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit()"><span class="fa fa-plus-sign"></span> <?= $this->lang->line('save_changes'); ?></button>
       </div>
     </div>
   </div>

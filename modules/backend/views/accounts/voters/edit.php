@@ -65,8 +65,9 @@
           <div class="col-md-4">
           <div class="form-group">
             <label class="control-label">Date Of Birth</label>
-            <input  maxlength="100" ng-model="dateofbirth" type="text" required="required" class="form-control"/>
+            <input  maxlength="100" ng-model="dateofbirth" type="text" required="required" class="form-control  datemask" id="date"/>
           </div>
+          <div date-picker selector=".datemask" ></div>
           </div>
           <div class="col-md-4">
           <div class="form-group">
@@ -86,7 +87,7 @@
           <div class="col-md-8">
           <div class="form-group">
             <label class="control-label">Phone Number</label>
-            <input maxlength="100" type="text" ng-model="phone" required="required" class="form-control"/>
+            <input maxlength="100" type="text" ng-model="phone" required="required" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
           </div>
           </div>
            <div class="col-md-4">
