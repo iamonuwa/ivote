@@ -1,27 +1,20 @@
-<?php get_header();?>
-		
-
-			<!-- HERO
-			================================= -->
-			<section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
+	
+	<section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
+	<div class="wrapper">
+	<?php  if($this->session->flashdata('msg') != ''){?>
+  <div id="alert-msg" class=" col-xs-4 alert alert-danger alert-dismissable">
+   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+   <i class="icon fa fa-bullhorn"></i><?= $this->session->flashdata('msg');?>
+  </div>
+                <?php }
+                  if($this->session->flashdata('success') != ''){?>
+   <div id="alert-success" class="alert alert-success alert-dismissable">
+   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+   <i class="icon fa fa-bullhorn"></i><?= $this->session->flashdata('success');?>
+  </div> <?php }?>
+  </div>
 
 				<div class="section-background">
-
-					<!-- IMAGE BACKGROUND -->
-					<!-- <div class="section-background-image parallax" data-stellar-ratio="0.4">
-						<img src="images/backgrounds/hero-bg-fullscreen-cta.jpg" style="opacity: 0.3;">
-					</div> -->
-
-					<!-- VIDEO BACKGROUND -->
-					<!-- <div class="section-background-video section-background-dot-overlay parallax" data-stellar-ratio="0.4">
-						<video preload="auto" autoplay loop muted poster="images/backgrounds/video-fallback-bg.jpg" style="opacity: 0.3;">
-							<source type="video/mp4" src="videos/video-bg.mp4">
-							<source type="video/ogg" src="videos/video-bg.ogv">
-							<source type="video/webm" src="videos/video-bg.webm">
-						</video>
-					</div> -->
-
-					<!-- SLIDESHOW BACKGROUND -->
 					<ul class="section-background-slideshow rslides parallax" data-stellar-ratio="0.4" data-speed="800" data-timeout="4000">
 						<li><img src="<?php theme_path('images/backgrounds/hero-bg-slideshow-1.jpg');?>" alt="" style="opacity: 0.25;"></li>
 						<li><img src="<?php theme_path('images/backgrounds/hero-bg-slideshow-2.jpg');?>" alt="" style="opacity: 0.25;"></li>
@@ -35,17 +28,17 @@
 					<div class="hero-content">
 						<div class="hero-content-inner">
 
+<?php var_dump($election);?>
 							<div class="row">
 							<?php if(isset($election)){?>
 							<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 
-											<!-- COUNTDOWN -->
 											
 											<div class="hero-countdown text-center">
 
 												<h3 class="hero-countdown-heading">Election Starts in &hellip;</h3>
 
-												<div class="countdown" data-countdown="<?= $election['election_date'];?>" style="display: none;">
+												<div class="countdown" data-countdown="<?= date('m/d/Y',$election['election_date']);?>" style="display: none;">
 													<!-- COUNTDOWN CONFIGURATION -->
 													<!-- ref: http://hilios.github.io/jQuery.countdown/documentation.html -->
 													<div class="countdown-grid">
@@ -124,7 +117,7 @@
                 
                 <div id="div-forms">
                 
-                    <form id="login-form" action="<?= base_url('login/authenticate');?>" method="POST">
+                    <form id="login-form" action="<?= base_url('voting');?>" method="POST">
 		                <div class="modal-body">
 				    		<div id="div-login-msg">
                                 <div id="icon-login-msg" class="fa fa-angle-right pull-right"></div>

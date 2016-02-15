@@ -13,23 +13,20 @@ class Frontend extends CI_Controller {
 	public function index()
 	{
 		
-		if ($this->aauth->is_loggedin()) {
-			redirect(base_url('voter/'.$this->aauth->get_user()->name),'refresh');
+		if ($this->ion_auth->logged_in()) {
+			redirect(base_url('voter'),'refresh');
 		}
 		$data['election'] = $this->election_model->get_by('is_active',1);
-		$this->theme->set_data('index',$data);
-	  	$this->theme->load(); 
+		$this->load->view('index', $data);
 	}
 
 	public function contact()
 	{
-		
 		$this->theme->load_file('views/pages/contact');
 	}
 
 	public function about()
 	{
-		
 		$this->theme->load_file('views/pages/about');
 	}
 
@@ -49,9 +46,9 @@ class Frontend extends CI_Controller {
 	}
 	public function logout()
 	{
-		if($this->aauth->logout()){
-        redirect(base_url(),'refresh');
-	    }
+		$logout = $this->ion_auth->logout();
+		$this->session->set_flashdata('message', $this->ion_auth->messages());
+		redirect(base_url(), 'refresh');
 	}
 }
 

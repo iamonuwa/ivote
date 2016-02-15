@@ -10,7 +10,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<?= base_url('login');?>"><img src="<?= base_url('public_html/uploads/logo.png');?>"></a>
+        <a href="<?= base_url('admin');?>"><img src="<?= base_url('public_html/uploads/logo.png');?>"></a>
       </div>
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -19,7 +19,7 @@
               <h4>Login Failure</h4>
               <?php echo $this->session->flashdata('msg');?>
         </div><?php  }?>
-        <form name="login" action="<?= base_url('login/authenticate');?>" method="post">
+        <form name="login" action="<?= base_url('admin');?>" method="post">
           <div class="form-group has-feedback">
             <input type="text" name="id_number" class="form-control" placeholder="ID Number">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

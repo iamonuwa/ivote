@@ -158,7 +158,7 @@
                   </div>
                   <div class="col-xs-4">
                     <label>Select Constituency</label>
-                     <select ng-model="constituency" class="form-control" ng-init="getLGA()">
+                     <select ng-model="item.constituency" class="form-control" ng-init="getLGA()">
                         <option>-- Please Select --</option>
                           <option ng-repeat="lga in lgas" value="{{lga.name}}">{{lga.name}}</option>
                         </select>
@@ -182,7 +182,7 @@
              </div>
               <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
-            <button type="button" class="btn btn-success" ng-click="updateData(item)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
+            <button type="button" class="btn btn-success" ng-click="updateData(item.id, item.surname, item.firstname, item.othername, item.dateofbirth, item.gender, item.party,item.office, item.education, item.state, item.constituency, item.phone, item.email)"><span class="gyphicon glyphicon-plus-sign"></span> Save Changes</button>
           </div>
              </div>
              </div>

@@ -1,3 +1,4 @@
+<?php get_header();?>
 <!-- CONTACT + MAPS
 			================================= -->
 			<section id="contact-maps" class="contact-maps-section section">
@@ -15,29 +16,22 @@
 						var gmap_options = {
 							generate_controls : false,
 							locations : [{
-								lat : -8.72093,
-								lon : 115.16964,
+								lat : 9.077616,
+								lon : 7.492041, 
 								animation : google.maps.Animation.DROP,
 								html : "Drew Headquarter",
 								icon : "images/contents/map-1.png",
-								clickable : false,
-							}, {
-								lat : -8.71595,
-								lon : 115.17398,
-								animation : google.maps.Animation.DROP,
-								html : "Workshop & Store",
-								icon : "images/contents/map-2.png",
 								clickable : false,
 							}],
 							map_options : {
 								scrollwheel : false,
 								mapTypeControl : false,
-								streetViewControl : false,
+								streetViewControl : true,
 								zoomControlOptions : {
 									style : google.maps.ZoomControlStyle.SMALL,
 								},
 								zoom : 15,
-								set_center : [ -8.72093, 115.18964 ], // adjust the "lon" attribute of your first location
+								set_center : [ 9.077616, 7.492041 ], // adjust the "lon" attribute of your first location
 							},
 							styles : {
 								// source: https://snazzymaps.com/style/132/light-gray
@@ -55,23 +49,15 @@
 							<div class="contact-maps-box" data-animation="fadeIn">
 
 								<h2 class="section-heading">Contact Us</h2>
-								<p>Suspendisse nisi est, ullamcorper id eleifend nec, aliquam eget quam. Vivamus erat libero, venenatis ac metus in, lobortis rhoncus ex.</p>
 
 								<div class="row">
 									<address class="col-sm-6">
-										<strong>Drew Headquarter</strong>
+										<strong>INEC Headquarters</strong>
 										<ul class="fa-ul">
-											<li><i class="fa-li fa fa-home"></i>Jalan Pantai Kuta, Kuta<br>Bali, Indonesia</li>
-											<li><i class="fa-li fa fa-phone"></i>Phone: +62 109 876543</li>
-											<li><i class="fa-li fa fa-fax"></i>Fax: +62 109 876543</li>
-										</ul>										
-									</address>
-									<address class="col-sm-6">
-										<strong>Workshop &amp; Store</strong>
-										<ul class="fa-ul">
-											<li><i class="fa-li fa fa-home"></i>Jalan Legian, Kuta<br>Bali, Indonesia</li>
-											<li><i class="fa-li fa fa-phone"></i>Phone: +62 109 876543</li>
-											<li><i class="fa-li fa fa-fax"></i>Fax: +62 109 876543</li>
+											<li><i class="fa-li fa fa-home"></i>INEC <br> Plot 436 Zambezi Crescent<br>FCT, Abuja<br> NIGERIA</li>
+											<li><i class="fa-li fa fa-phone"></i>Phone: 0700-CALL-INEC</li>
+											<li><i class="fa-li fa fa-inbox"></i>Email: <a href="mailto:contact@inecnigeria.org"> contact@inecnigeria.org </a></li>
+											<li><a href="http://www.inecnigeria.org/?page_id=373" target="_blank" title="State Offices">INEC State Offices</a></li>
 										</ul>										
 									</address>
 								</div>
@@ -103,3 +89,4 @@
 				</div>
 
 			</section>
+<?php get_footer();?>

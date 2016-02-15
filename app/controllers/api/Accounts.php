@@ -95,21 +95,21 @@ class Accounts extends REST_Controller{
         $pass = generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds');
         $name = $data->name;
         $picture = $data->picture;
-        // if(empty($data->surname)){
-        //     $error = 'Surnname is required';
-        //     $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
-        // }
-        // $create = $this->aauth->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,$email, $pass, $name, $picture);
-        // if($create){
-        // $success = 'Account Has Been Created';
-        // $this->set_response($success, REST_Controller::HTTP_CREATED);            
-        // $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
+        if(empty($data->surname)){
+            $error = 'Surnname is required';
+            $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $create = $this->aauth->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,$email, $pass, $name, $picture);
+        if($create){
+        $success = 'Account Has Been Created';
+        $this->set_response($success, REST_Controller::HTTP_CREATED);            
+        $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
         // sms($phone, $message);
-        // }
-        // else{
-        // $error = $this->aauth->print_errors();
-        //     $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
-        // }
+        }
+        else{
+        $error = $this->aauth->print_errors();
+            $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+        }
         // var_dump($create);
     }
 

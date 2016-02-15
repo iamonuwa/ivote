@@ -59,8 +59,9 @@
                         <td>{{ role.name }}</td>
                         <td>{{ role.definition }}</td>
                         <td> 
-                        <button type="submit" class="btn btn-sm btn-primary" ng-click="getDataByRole(role)" data-toggle="modal" data-target="#roleModal" name="edit"> <span class="glyphicon glyphicon-cog"></span></a> 
-                           <button type="submit" class="btn btn-sm btn-success" ng-click="editData(role)" data-toggle="modal" data-target="#editModal" name="edit"><span class="glyphicon glyphicon-edit"></span> </button> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(role.id)" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
+                        <button type="submit" class="btn btn-sm btn-primary" ng-click="getDataByRole(role)" data-toggle="modal" data-target="#roleModal" name="edit"> <span class="glyphicon glyphicon-cog"></span> </button> 
+                           <button type="submit" class="btn btn-sm btn-success" ng-click="editData(role)" data-toggle="modal" data-target="#editModal" name="edit"><span class="glyphicon glyphicon-edit"></span> </button> 
+                           <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(role.id)" name="delete"><span class="glyphicon glyphicon-trash"></span> </button>
                         </td>
                       </tr>
                       </tbody>
@@ -95,14 +96,14 @@
         <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('create_new_role');?></h4>
       </div>
       <div class="modal-body">
-        <form name="addPermission">
+        <form name="roles">
         <div class="form-group">
           <label><?= $this->lang->line('title'); ?></label>
-          <input type="text" ng-model="name" class="form-control">
+          <input type="text" ng-model="name" name="name" class="form-control">
         </div>
         <div class="form-group">
                       <label><?= $this->lang->line('definition'); ?></label>
-                      <textarea class="form-control" ng-model="definition" rows="3" placeholder="Describe Role"></textarea>
+                      <textarea class="form-control" ng-model="definition" name="definition" rows="3" placeholder="Describe Role"></textarea>
                     </div>
        
         </form>
@@ -123,7 +124,7 @@
         <h4 class="modal-title" id="ModalLabel">Modify Role #{{ item.id }}</h4>
       </div>
       <div class="modal-body">
-        <form name="addPermission">
+        <form name="roles">
         <div class="form-group">
           <label><?= $this->lang->line('title'); ?></label>
           <input type="text" ng-model="item.name" class="form-control">
@@ -152,19 +153,15 @@
       </div>
       <div class="modal-body">
         <form name="addPermission" id="myform">
-        <ul>
-          <li ng-repeat="perm in item" class="checkbox"> 
-          <label>
-            <input id="checkBox" type="checkbox" name="perm.name" value="" />
-            {{ perm.name }}
-          </label>
-          </li>
-        </ul>
+        <label class="form-control"> Assign Permission to Group</label>
+        <select ng-model="item.control" class="form-control" ng-init="getDataByRole()">
+          <option ng-repeat="items in item" value="{{items.name}}">{{items.name}}</option>
+        </select>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close'); ?></button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit()"><span class="fa fa-plus-sign"></span> <?= $this->lang->line('save_changes'); ?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="controlData(item.control, role.name)"><span class="fa fa-plus-sign"></span> <?= $this->lang->line('save_changes'); ?></button>
       </div>
     </div>
   </div>
@@ -172,13 +169,3 @@
 
 </div>
 </section>
-<script>
-  var submit = function(){
-    $(this).find(':checkbox').each(function(){
-        if(this.checked)
-            alert(this.name + ' is checked');
-        else
-            alert(this.name + ' is not checked');
-    });
-};   
-</script>

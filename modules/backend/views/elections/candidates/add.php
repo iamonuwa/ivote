@@ -21,7 +21,7 @@
                   <div class="box-body">
                     <div class="form-group">
                     <div class="col-xs-12 text-center">
-              <label ng-model="picture" id="image-holder" ></label>
+              <img ng-show="image" ng-src="{{image.url}}" id="image-holder" type="{{image.file.type}}"/> 
                     </div>
                       <div class="col-xs-4">
                         <label for="surname" class="control-label">Surname</label>
@@ -111,12 +111,10 @@
               </div>
               </div>
               <div class="col-xs-6">
-            <input id="file" type="file" />
-            <br>
-            <button type="button" class="btn btn-default" id="image_alt"> <span class="fa fa-upload"></span>Upload Passport</button>
+              <br>
+            <input id="inputImage" type="file" id="fileUpload" accept="image/*" image="image" />
           </div>
                   </div><!-- /.box-body -->
-
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()">Close</button>
             <button type="button" class="btn btn-success" ng-click="addData()"><span class="gyphicon glyphicon-plus-sign"></span> Register Candidate</button>
@@ -126,59 +124,18 @@
  
         </div>
         </div>
-        <style>
-.size {
-    width: 100px;
-    height: 100px;
-}
-.invisible-border {
-    border: 1px solid transparent;
-}
-.myCircle {
-    padding: 10px;
-    border-radius: 50%;
-}
-input#fileUpload{position:fixed;top:-100px;}
-</style>
-<script>
-  document.getElementById('image_alt').addEventListener('click',function(){
-    document.getElementById('fileUpload').click();
+        <script>
+$("#date").inputmask("99/99/9999");
+$("#phone").inputmask("(9) 999-999-9999");
+$("#phone").on("blur", function() {
+    var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+    if( last.length == 3 ) {
+        var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
+        var lastfour = move + last;
+        
+        var first = $(this).val().substr( 0, 9 );
+        
+        $(this).val( first + '-' + lastfour );
+    }
 });
-</script>
-<script>
-  $("#fileUpload").on('change', function () {
-
-     //Get count of selected files
-     var countFiles = $(this)[0].files.length;
-
-     var imgPath = $(this)[0].value;
-     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-     var image_holder = $("#image-holder");
-     image_holder.empty();
-
-     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-         if (typeof (FileReader) != "undefined") {
-
-             //loop for each file selected for uploaded.
-             for (var i = 0; i < countFiles; i++) {
-
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                     $("<img />", {
-                         "src": e.target.result,
-                             "class": "img-circle center-block size padding invisible-border"
-                     }).appendTo(image_holder);
-                 }
-
-                 image_holder.show();
-                 reader.readAsDataURL($(this)[0].files[i]);
-             }
-
-         } else {
-             alert("This browser does not support FileReader.");
-         }
-     } else {
-         alert("Pls select only images");
-     }
- });
 </script>

@@ -60,11 +60,11 @@
                     <tbody ng-init="getData()">
                       <tr class="odd" role="row" ng-repeat="voter in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                         <td>{{ voter.surname }} {{ voter.firstname }}  {{ voter.othername }}</td>
-                        <td>{{ voter.name }}</td>
-                        <td>{{ voter.email }}</td>
+                        <td>{{ voter.username }}</td>
+                        <!-- <td>{{ voter.email }}</td> -->
                         <td>{{ voter.phone }}</td>
                         <td>{{ voter.gender }}</td>
-                        <td> <a href="#/modify-voter" class="btn btn-sm btn-success" data-toggle="modal" ng-click="editData(voter)" title="Modify Account" ><span class="glyphicon glyphicon-edit"></span></a> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(voter.name)" name="delete" title="Remove Account"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(voter)" name="print" title="Print voter Details"><span class="glyphicon glyphicon-print"></span></button></td>
+                        <td> <a href="#/modify-voter" class="btn btn-sm btn-success" data-toggle="modal" ng-click="editData(voter)" title="Modify Account" ><span class="glyphicon glyphicon-edit"></span></a> <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteData(voter.username)" name="delete" title="Remove Account"><span class="glyphicon glyphicon-trash"></span></button> <button type="submit" class="btn btn-sm btn-primary" ng-click="printData(voter)" name="print" title="Print voter Details"><span class="glyphicon glyphicon-print"></span></button></td>
                       </tr>
                       </tbody>
                   </table></div></div>

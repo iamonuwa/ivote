@@ -1,5 +1,3 @@
-
-
 			<!-- FOOTER
 			================================= -->
 			<section id="footer" class="footer-section section">
@@ -18,7 +16,7 @@
 					</div>
 
 					<div class="footer-copyright">
-						&copy; <?= date('Y');?> INEC iVoter Application
+						<?= copyright();?>
 					</div>
 
 				</div>

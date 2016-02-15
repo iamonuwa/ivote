@@ -11,7 +11,7 @@ class Voters_model extends MY_Model{
      * This model's default database table. Automatically
      * guessed by pluralising the model name.
      */
-    protected $_table = 'aauth_voters';
+    protected $_table = 'voters';
 
     /**
      * This model's default primary key or unique identifier.
@@ -22,8 +22,8 @@ class Voters_model extends MY_Model{
     /**
      * Support for soft deletes and this model's 'deleted' key
      */
-    protected $soft_delete = FALSE;
-    protected $soft_delete_key = 'banned';
+    protected $soft_delete = TRUE;
+    protected $soft_delete_key = 'deleted';
     protected $_temporary_with_deleted = FALSE;
     protected $_temporary_only_deleted = FALSE;
     
@@ -42,18 +42,17 @@ class Voters_model extends MY_Model{
     
     public function remove_sensitive_data($param) {
     unset($param['pass']);
-    unset($param['banned']);
     unset($param['deleted']);
-    // unset($param['last_login']);
-    unset($param['last_activity']);
-    unset($param['last_login_attempt']);
-    unset($param['forgot_exp']);
-    unset($param['remember_time']);
-    unset($param['remember_exp']);
-    unset($param['verification_code']);
-    unset($param['totp_secret']);
-    unset($param['ip_address']);
-    unset($param['login_attempts']);
+    // unset($param['deleted']);
+    // unset($param['last_activity']);
+    // unset($param['last_login_attempt']);
+    // unset($param['forgot_exp']);
+    // unset($param['remember_time']);
+    // unset($param['remember_exp']);
+    // unset($param['verification_code']);
+    // unset($param['totp_secret']);
+    // unset($param['ip_address']);
+    // unset($param['login_attempts']);
     return $param;
     }
 }

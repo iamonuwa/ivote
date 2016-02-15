@@ -33,13 +33,11 @@ class Login extends CI_Controller {
 		 }
 		else{
 		 	if($this->aauth->login($username, $password, $remember = FALSE, $totp_code = NULL)){
-		 		if($this->aauth->is_member('Default')){
-		 			redirect(base_url('voter/'.$this->aauth->get_user()->name),'refresh');
-		 		}
-		 		else{
 		 			redirect(base_url('backend'),'refresh');
-		 		}
 		 	}
+		 	elseif ($this->voter->login($username, $password, $remember = FALSE, $totp_code = NULL)){
+		 			redirect(base_url('voter/'.$this->voter->get_user()->name),'refresh');
+		 		}
 		 	else{
 		 	$this->session->set_flashdata('msg', $this->aauth->print_errors());
 		 		if($this->router->fetch_module() ==' frontend'){

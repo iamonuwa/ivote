@@ -37,7 +37,7 @@ class Voters extends REST_Controller{
     public function index_get()
     {
         $id = $this->get('id');
-        $users = $this->voter->list_voters();
+        $users = $this->voters_model->get_all();
         if ($id === NULL)
         {
             if ($users)
@@ -52,7 +52,7 @@ class Voters extends REST_Controller{
                 ], REST_Controller::HTTP_NOT_FOUND);
             }
         }
-        $users = $this->users_model->get_by('id', $id);
+        $users = $this->voters_model->get_by('id', $id);
         $id = (int) $users;
         if (count($id) <= 0)
         {
@@ -90,19 +90,32 @@ class Voters extends REST_Controller{
         $phone = phone_helper($data->phone);
         $occupation = $data->occupation;
         $picture = $data->picture;
-        // $email = $data->email;
+        $email = '';
         $pass = generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds');
         $name = $data->name;
+
+        $additional_data = array(
+            'surname' => $surname,
+            'firstname'=> $firstname,
+            'othername'=> $othername,
+            'dateofbirth'=>$dateofbirth,
+            'gender'=> $gender,
+            'phone'=> $phone,
+            'occupation'=>$occupation,
+            'picture'=>$picture
+            );
         if(empty($data->surname)){
             $error = 'Surnname is required';
             $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
         }
-        $create = $this->voter->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,/*$email,*/ $picture, $pass, $name);
+        $create = $this->ion_auth->register($name, $pass, $email, $additional_data);
+        // $create = $this->voter->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,/*$email,*/ $picture, $pass, $name);
         if($create){
-        $success = 'Voter '.$name.' Has Been Registered';
-        $this->set_response($success, REST_Controller::HTTP_CREATED);            
         $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
-        sms($phone, $message);
+        // $success = 'Voter '.$name.' Has Been Registered';
+        $this->set_response($message, REST_Controller::HTTP_CREATED);            
+        $message = "Your Login Details are: \n LoginID: ".$name." \n Login Password: ".$pass;
+        // sms($phone, $message);
         }
         else{
         $error = $this->voter->print_errors();
@@ -122,7 +135,7 @@ class Voters extends REST_Controller{
             $this->response($error, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
         else{
-        $delete = $this->voters_model->delete_by('name',$id);
+        $delete = $this->voters_model->delete_by('username',$id);
         if($delete){
             $success = 'Voter #'.$id.' has been deleted successfully';
             $this->set_response($success, REST_Controller::HTTP_OK); 

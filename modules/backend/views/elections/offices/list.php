@@ -95,7 +95,7 @@
         <h4 class="modal-title" id="ModalLabel"><?= $this->lang->line('create_new_position');?></h4>
       </div>
       <div class="modal-body">
-        <form name="add">
+        <form name="office">
          
         <div class="row">
           <div class="form-group">
@@ -126,7 +126,7 @@
         <h4 class="modal-title" id="ModalLabel">Edit Office # {{ item.id }}</h4>
       </div>
       <div class="modal-body">
-        <form name="addPermission">
+        <form name="office">
         <div class="form-group">
           <label><?= $this->lang->line('title');?></label>
           <input type="text" ng-model="item.name" class="form-control">
@@ -141,3 +141,14 @@
     </div>
   </div>
 </div>
+<script>
+  var validator = new FormValidator('office', [{
+        name: 'title',
+        display: 'required',
+        rules: 'required'
+    }], function(errors) {
+        if (errors.length > 0) {
+          toastr.warning(errors)
+        }
+    });
+</script>

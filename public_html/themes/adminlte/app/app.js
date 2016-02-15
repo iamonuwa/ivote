@@ -1,4 +1,4 @@
-var myApp = angular.module('ivoterApp', ['ngRoute', 'ngAnimate','ngResource','ui.bootstrap','omr.directives']);  
+var myApp = angular.module('ivoterApp', ['ngRoute', 'ngAnimate','ngResource','ui.bootstrap','omr.directives','imageupload']);  
 
 myApp.controller('navController', function ($scope){
     $scope.filteredItems =  [];
@@ -133,7 +133,7 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
         }
     
     //Post to API
-     $scope.add = function() {
+     $scope.add = function(image) {
         $scope.data = [];
         // $scope.pass = randomString(10);
         $http.post(BASE_URL + 'api/accounts/index/', 
@@ -145,7 +145,7 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
                 'gender' : $scope.gender,
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
-                'picture': $scope.picture,
+                'picture': $scope.image.dataURL,
                 'email' : $scope.email,
                 'name' : randomString(7, "N")
                 // 'pass' : $scope.pass
@@ -154,7 +154,6 @@ myApp.controller('accountsCtrl', function ($scope, $http, $route) {
         .success(function (message) {
           toastr.success(message)
             $scope.reset();
-            console.log($scope.picture);
             $route.reload();
         })
         .error(function (message){
@@ -265,6 +264,13 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         $scope.totalItems = $scope.pagedItems.length;
             });
         }
+         $scope.calculateAge = function (index) {
+            var birthdate = index;
+            var cur = new Date();
+            var diff = cur - birthdate;
+            var value = Math.floor(diff/31536000000);
+            $scope.age = value;
+         }
    
     //Post to API
      $scope.add = function() {
@@ -285,6 +291,9 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         )
         .success(function (message) {
           toastr.success(message)
+          console.log(message)
+          // $scope.reset();
+          // $scope.reload();
         })
         .error(function (message){
            toastr.warning(message)
@@ -311,6 +320,7 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
         })
         .error(function (message) {
             $scope.getData();
+            console.log(index)
             toastr.warning(message)
         });
     }
@@ -363,7 +373,6 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
      $scope.getDataByRole = function (index) {
         $http.get(BASE_URL + "api/permissions/index")
         .success(function (data) {
-            // console.log(index)
             angular.element(document.getElementById("roleModal")).scope().item = data;
             angular.element(document.getElementById("roleModal")).scope().role = index;
         })
@@ -371,23 +380,14 @@ myApp.controller('rolesCtrl', function ($scope, $http, $route) {
         });
     }
 
-    $scope.checkboxSelection = function () {
-        var selection = [];
-        var chkBox = document.getElementById("checkBox");
-        var chkBox_input = chkBox.length;
-        for(var i=0; i<chkBox_input; i++) {
-            if(chkBox[i].type == 'checkbox' && chkBox[i].checked == true) selection.push(chkBox[i].value);
-          }
-          return selection;
-    } 
-    $scope.addPermToRole = function(index, data) {
-        var selection = [];
-        var chkBox = document.getElementById("checkBox");
-        var chkBox_input = chkBox.length;
-        for(var i=0; i<chkBox_input; i++) {
-            if(chkBox[i].type == 'checkbox' && chkBox[i].checked == true) selection.push(chkBox[i].value);
-          }
-          console.log(chkBox_input);
+    $scope.controlData = function (item, role) {
+        $http.put(BASE_URL + "users/control_permission/" + item + "/" + role)
+        .success(function (message) {
+            toastr.success(message)
+        })
+        .error(function (message) {
+            toastr.warning(message)
+        })
     }
 
     $scope.updateData = function (id, name, definition) {
@@ -629,66 +629,35 @@ myApp.controller('candidatesCtrl', function ($scope, $http) {
         });
     }
 
-    $scope.addData = function (file) {
-        // console.log($scope.holder);
-        // Form Upload
-
-// function MyCtrl ($scope) {
-//     $scope.data = {};
-//     $scope.add = function () {
-        var holder = document.getElementById('file').files[0],
-        r = new FileReader();
-        r.onloadend = function (e) {
-            // $scope.data = e.target.result;
-            console.log(e.target.result);
-        }
-            console.log(e.target.result);
-
-//         r.readAsBinaryString(holder);
-//     }
-// }
-        // $http.post(BASE_URL + 'api/candidates/index', {
-        //     'surname'       : $scope.surname,
-        //     'firstname'     : $scope.firstname,
-        //     'othername'     : $scope.othername,
-        //     'dateofbirth'   : $scope.dateofbirth,
-        //     'gender'        : $scope.gender,
-        //     'party'         : $scope.party,
-        //     'office'        : $scope.office,
-        //     'education'     : $scope.education,
-        //     'state'         : $scope.state,
-        //     'constituency'  : $scope.constituency,
-        //     'phone'         : $scope.phone,
-        //     'email'         : $scope.email,
-        //     'picture'       : $scope.picture
-        // }).success( function (message) {
-        //     toastr.success(message)
-        // }).error( function (message) {
-        //     toastr.warning(message)
-        //     console.log(message)
-        // });
+    $scope.addData = function (image) {
+        $http.post(BASE_URL + 'api/candidates/index', {
+            'surname'       : $scope.surname,
+            'firstname'     : $scope.firstname,
+            'othername'     : $scope.othername,
+            'dateofbirth'   : $scope.dateofbirth,
+            'gender'        : $scope.gender,
+            'party'         : $scope.party,
+            'office'        : $scope.office,
+            'education'     : $scope.education,
+            'state'         : $scope.state,
+            'constituency'  : $scope.constituency,
+            'phone'         : $scope.phone,
+            'email'         : $scope.email,
+            'picture'       : $scope.image.dataURL
+        }).success( function (message) {
+            toastr.success(message)
+        }).error( function (message) {
+            toastr.warning(message)
+            console.log(message)
+        });
     }
 
      $scope.editData = function (index) {
          angular.element(document.getElementById("editModal")).scope().item = index;
         };
 
-    $scope.updateData = function (index) {
-        // var data = {
-        //         surname     : index.surname, 
-        //         firstname   : index.firstname, 
-        //         othername   : index.othername,
-        //         dateofbirth : index.dateofbirth,
-        //         gender      : index.gender,
-        //         party       : index.party,
-        //         office      : index.office,
-        //         education   : index.education,
-        //         state       : index.state,
-        //         constituency: index.constituency,
-        //         phone       : index.phone,
-        //         email       : index.email
-        // };
-        $http.put(BASE_URL + "api/candidates/index/" + index.id + "/" + index.surname + "/" + index.firstname + "/" + index.othername + "/" + index.dateofbirth + "/" + index.gender + "/" + index.party + "/" + index.office + "/" + index.education + "/" + index.state + "/" + index.constituency + "/" + index.phone + "/" + email)
+    $scope.updateData = function (id ,surname, firstname, othername, dateofbirth, gender, party, office, education, state, constituency, phone, email) {
+        $http.put(BASE_URL + "api/candidates/index/" + id + "/" + surname + "/" + firstname + "/" + othername + "/" + dateofbirth + "/" + gender + "/" + party + "/" + office + "/" + education + "/" + state + "/" + constituency + "/" + phone + "/" + email)
         .success(function (message) {
             toastr.success(message)
             // console.log(message)
@@ -745,11 +714,13 @@ myApp.controller('electionCtrl', function ($scope, $http, $route) {
     }
 
     $scope.addData = function () {
+        var date = new Date();
         $http.post(BASE_URL + "api/elections/index",
         {
             'title' : $scope.title,
             'category' : $scope.category,
-            'election_date': $scope.election_date,
+            'election_date': Date.parse($scope.election_date),
+            'date_created': Date.now(),
             'duration' : $scope.duration,
             'status' : $scope.status
         })

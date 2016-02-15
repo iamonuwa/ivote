@@ -147,7 +147,7 @@ class Backend extends CI_Controller {
 	public function logout()
 	{
 		$this->aauth->logout();
-        redirect(base_url('backend/login'),'refresh');
+        redirect(base_url('admin'),'refresh');
 	}
 
 	public function messaging()

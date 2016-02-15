@@ -1,8 +1,10 @@
-       <footer class="main-footer">
+       <!-- <footer class="main-footer"> -->
+        <div class="navbar navbar-inner  navbar-fixed-bottom">
         <div class="pull-right hidden-xs">
           <b>Version</b> <?= app_version();?>
-        </div>
+        <!-- </div> --><br>
        <?= copyright();?>
+       </div>
       </footer>
       <aside class="control-sidebar control-sidebar-dark">
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -14,7 +16,6 @@
       </aside>
       <div class="control-sidebar-bg"></div>
     <script src="<?php theme_path('plugins/jQuery/jQuery-2.1.4.min.js');?>"></script>
-    <script src="<?php theme_path('dist/js/moment.min.js');?>"></script> 
     <script src="<?php theme_path('dist/angular/angular.min.js');?>"></script>
     <script src="<?php theme_path('dist/angular/angular-route.min.js');?>"></script>
     <script src="<?php theme_path('dist/angular/angular-resource.min.js');?>"></script>
@@ -36,33 +37,24 @@
     <script src="<?php theme_path('plugins/input-mask/jquery.inputmask.js');?>"></script>
     <script src="<?php theme_path('plugins/input-mask/jquery.inputmask.date.extensions.js');?>"></script>
     <script src="<?php theme_path('plugins/input-mask/jquery.inputmask.extensions.js');?>"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="<?php theme_path('plugins/daterangepicker/daterangepicker.js');?>"></script>
     <script src="<?php theme_path('plugins/datepicker/bootstrap-datepicker.js');?>"></script>
     <script src="<?php theme_path('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
     <script src="<?php theme_path('plugins/slimScroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php theme_path('plugins/iCheck/icheck.min.js');?>"></script>
     <script src="<?php theme_path('plugins/fastclick/fastclick.min.js');?>"></script>
+    <script src="<?php theme_path('dist/js/validate.min.js');?>"></script>
     <script src="<?php theme_path('dist/js/app.min.js');?>"></script>
     <script src="<?php theme_path('dist/js/demo.js');?>"></script>
     <script src="<?php theme_path('app/app.js');?>"></script>
     <script src="<?php theme_path('app/route.js');?>"></script>
+    <script src="<?php theme_path('app/imageupload.js');?>"></script>
     <script src="<?php theme_path('app/init.js');?>"></script>
     <script src="<?php theme_path('app/camera/app.js');?>"></script>
     <script src="<?php theme_path('app/camera/controller.js');?>"></script>
     <script src="<?php theme_path('app/camera/directive.js');?>"></script>
-<script>
-  $(function () {
-        $("[data-mask]").inputmask();
-      });
 
-</script>
-
-<script>
-      $(function () {
-        //Add text editor
-        $("#compose-textarea").wysihtml5();
-      });
-    </script>
  <script>
 toastr.options = {
   "closeButton": true,

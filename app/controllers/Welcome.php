@@ -20,18 +20,21 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
-		// var_dump($this->aauth->list_perms());
-
-		// var_dump($this->aauth->allow_group('Admin','Demo'));
-		// var_dump($this->aauth->control('Demo'));
-		// var_dump($this->aauth->control());
-		if ($this->aauth->control() == FALSE) {
-			echo 'Na true';
-		}
-		else{
-			echo "SHuuu";
-		}
+		$password = '12345';
+		echo $this->bcrypt->hash($password);
+		// $this->load->view('welcome_message');
+		// $surname = 'Onuwa';
+  //       $firstname = 'Nnachi';
+  //       $othername = 'Isaac';
+  //       $dateofbirth = '23/11/1990';
+  //       $gender = 'MALE';
+  //       $phone = phone_helper('08062457326');
+  //       $occupation = 'Student';
+  //       $picture = '';
+  //       // $email = $data->email;
+  //       $pass = 'Beautiful4u';
+  //       $name = '12345';
+  //       $this->voter->create_user($surname, $firstname, $othername, $dateofbirth, $gender, $phone, $occupation,/*$email,*/ $picture, $pass, $name);
 	}
 
 	public function test()

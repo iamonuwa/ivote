@@ -82,8 +82,24 @@ class Ballot extends REST_Controller{
 
     public function index_post()
     {
-        echo "Hello World";
-        // $this->set_response($message, REST_Controller::HTTP_CREATED);
+        if ($this->input->post()) {
+            $data['voter_id'] = $this->bcrypt->hash($this->session->userdata('id'));
+            $data['candidate_id'] = $this->bcrypt->hash($this->input->post('radio'));
+            $vote = $this->ballot_model->insert($data);
+        if ($vote) {
+        $success = 'Your Vote has been recorded. You will logged out permanently from this system.';
+        $this->set_response($success, REST_Controller::HTTP_CREATED);            
+        }
+        else{
+        $error = 'An Error has occured. Please try again later';
+            $this->set_response($error, REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+         }
+        }
+        else{
+        $error = 'You have not voted for candidate';
+        $this->set_response($error, REST_Controller::HTTP_BAD_REQUEST);
+        }
+
     }
 
     public function index_delete($id)

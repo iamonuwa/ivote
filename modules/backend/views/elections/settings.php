@@ -60,10 +60,10 @@
                       <tr class="odd" role="row" ng-repeat="data in filtered = (pagedItems | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                         <td>{{ data.title }}</td>
                         <td>{{ data.category }}</td>
-                        <td>{{ data.election_date }}</td>
+                        <td>{{ data.election_date | date:'MM/dd/yyyy' }}</td>
                         <td>{{ data.created_by }}</td>
                         <!-- <td>{{ data.is_active }}</td> -->
-                        <td>{{ data.date_created }}</td>
+                        <td>{{ data.date_created | date:'MM/dd/yyyy' }}</td>
                         <td>{{ data.last_update }}</td>
                         <td>  <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" ng-click="editData(data)" title="Modify Election" ><span class="glyphicon glyphicon-edit"></span></button> 
                         <button type="submit" class="btn btn-sm btn-danger" ng-hide="data.is_active == 1" ng-click="deleteData(data.id)" name="unblock" title="Remove Election"><span class="glyphicon glyphicon-trash"></span></button>
@@ -116,14 +116,14 @@
                       <option value="RE-RUN">RE-RUN</option>
             </select>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <label for="election_date" class="control-label"><?= $this->lang->line('election_date');?></label>
             <input type="text" ng-model="election_date" class="form-control datemask" id="date">
           </div>
           <div date-picker selector=".datemask" ></div>
-           <div class="col-xs-4">
+           <div class="col-xs-6">
             <label for="duration" class="control-label"><?= $this->lang->line('duration');?></label>
-            <input type="text" ng-model="duration" class="form-control" required>
+            <input type="text" ng-model="duration" class="form-control" id="reservationtime" required>
           </div>
           </div>
           </div>
@@ -162,14 +162,14 @@
                       <option value="RE-RUN">RE-RUN</option>
             </select>
           </div>
-          <div class="col-xs-8">
+          <div class="col-xs-6">
             <label for="election_date" class="control-label"><?= $this->lang->line('election_date');?></label>
-            <input type="text" ng-model="item.election_date" class="form-control datemask" id="date">
+            <input type="text" ng-model="item.election_date| date:'MM/dd/yyyy' " class="form-control datemask" id="date">
           </div>
           <div date-picker selector=".datemask" ></div>
-           <div class="col-xs-4">
+           <div class="col-xs-6">
             <label for="duration" class="control-label"><?= $this->lang->line('duration');?></label>
-            <input type="text" ng-model="item.duration" class="form-control" id="date" required>
+            <input type="text" ng-model="item.duration" class="form-control" id="reservationtime" required>
           </div>
           <div class="col-xs-4">
           <label class="control-label"><?= $this->lang->line('status');?></label>
@@ -190,3 +190,9 @@
   </div>
 </div>
 </div>
+<script>
+  $("#date").inputmask("99/99/9999");
+</script>
+<script>
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+</script>

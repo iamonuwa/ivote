@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['admin'] = 'backend/login';
+$route['voting'] = 'frontend/login';
 
 /* Page Begin */
 
@@ -66,7 +67,7 @@ $route['elections'] = 'frontend/elections';
 /* Page End */
 
 /* Frontend Begins  */
-$route['voter/(:any)'] = 'frontend/voter';
+$route['voter'] = 'frontend/voter';
 $route['logout'] = 'frontend/logout';
 
 // $route['api/accounts/current'] = 'api/accounts/current'; 

@@ -123,7 +123,7 @@
         <div class="row">
           <div class="form-group">
           <div class="col-xs-12 text-center">
-              <label ng-model="picture" id="image-holder" ></label>
+              <img ng-show="image" ng-src="{{image.url}}" id="image-holder" type="{{image.file.type}}"/> 
           </div>
           <div class="col-xs-4">
             <label for="surname" class="control-label"><?= $this->lang->line('surname');?></label>
@@ -169,7 +169,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </div>
-                      <input type="text" ng-model="phone" class="form-control" placeholder="08062457326"required>
+                      <input type="text" ng-model="phone" class="form-control" id="phone" placeholder="08062457326"required>
                     </div>
           </div>
           <div class="col-xs-6">
@@ -190,9 +190,9 @@
                     </div>
           </div>
           <div class="col-xs-6">
-            <input id="fileUpload" type="file" />
+          <br>
+            <input id="inputImage" type="file" id="fileUpload" accept="image/*" image="image" />
             <br>
-            <button type="button" class="btn btn-default" id="image_alt"> <span class="fa fa-upload"></span>Upload Passport</button>
           </div>
           </div>
           </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-init="getData()"><?= $this->lang->line('close');?></button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="add()"><span class="gyphicon glyphicon-plus-sign"></span><?= $this->lang->line('create_new_account');?></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="add(image)"><span class="gyphicon glyphicon-plus-sign"></span><?= $this->lang->line('create_new_account');?></button>
       </div>
     </div>
   </div>
@@ -261,7 +261,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </div>
-                      <input type="text" ng-model="item.phone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask required>
+                      <input type="text" ng-model="item.phone" class="form-control" id="phone" required>
                     </div>
           </div>
           <div class="col-xs-6">
@@ -288,59 +288,19 @@
 </div>
 
 </section>
-<style>
-.size {
-    width: 100px;
-    height: 100px;
-}
-.invisible-border {
-    border: 1px solid transparent;
-}
-.myCircle {
-    padding: 10px;
-    border-radius: 50%;
-}
-input#fileUpload{position:fixed;top:-100px;}
-</style>
+
 <script>
-  document.getElementById('image_alt').addEventListener('click',function(){
-    document.getElementById('fileUpload').click();
+$("#date").inputmask("99/99/9999");
+$("#phone").inputmask("(9) 999-999-9999");
+$("#phone").on("blur", function() {
+    var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+    if( last.length == 3 ) {
+        var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
+        var lastfour = move + last;
+        
+        var first = $(this).val().substr( 0, 9 );
+        
+        $(this).val( first + '-' + lastfour );
+    }
 });
-</script>
-<script>
-  $("#fileUpload").on('change', function () {
-
-     //Get count of selected files
-     var countFiles = $(this)[0].files.length;
-
-     var imgPath = $(this)[0].value;
-     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-     var image_holder = $("#image-holder");
-     image_holder.empty();
-
-     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-         if (typeof (FileReader) != "undefined") {
-
-             //loop for each file selected for uploaded.
-             for (var i = 0; i < countFiles; i++) {
-
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                     $("<img />", {
-                         "src": e.target.result,
-                             "class": "img-circle center-block size padding invisible-border"
-                     }).appendTo(image_holder);
-                 }
-
-                 image_holder.show();
-                 reader.readAsDataURL($(this)[0].files[i]);
-             }
-
-         } else {
-             alert("This browser does not support FileReader.");
-         }
-     } else {
-         alert("Pls select only images");
-     }
- });
 </script>

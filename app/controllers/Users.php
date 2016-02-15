@@ -25,6 +25,18 @@ class Users extends CI_Controller {
 		var_dump('Edit Profile');
 	}
 
+	public function control_permission($item, $role)
+	{
+		var_dump($item);
+		// $check = $this->aauth->allow_group($item, $role);
+		// if ($check) {
+		// 	echo json_decode("success","Permission has been assigned to Group");
+		// }
+		// else{
+		// 	echo json_decode("error", $this->aauth->print_errors());
+		// }
+	}
+
 }
 
 /* End of file Users */

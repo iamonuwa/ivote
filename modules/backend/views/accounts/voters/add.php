@@ -65,7 +65,7 @@
           <div class="col-md-4">
           <div class="form-group">
             <label class="control-label">Date Of Birth</label>
-            <input  maxlength="100" ng-model="dateofbirth" type="text" required="required" class="form-control datemask" id="date"/>
+            <input  maxlength="100" ng-model="dateofbirth" type="text" id="date" ng-change = "calculateAge(dateofbirth)" required="required" class="form-control datemask" id="date"/>
           </div>
           <div date-picker selector=".datemask" ></div>
           </div>
@@ -81,13 +81,13 @@
            <div class="col-md-4">
           <div class="form-group">
             <label class="control-label">Age</label>
-         <input maxlength="100" type="text" ng-model="age" required="required" class="form-control"/>
+         <input maxlength="100" type="text" ng-init="calculateAge()" ng-model="age" required="required" class="form-control"/>
           </div>
           </div>
           <div class="col-md-8">
           <div class="form-group">
             <label class="control-label">Phone Number</label>
-            <input maxlength="100" type="text" ng-model="phone" required="required" class="form-control"/>
+            <input maxlength="100" type="text" ng-model="phone" id="phone" required="required" class="form-control"/>
           </div>
           </div>
            <div class="col-md-4">
@@ -156,7 +156,7 @@
          <div class="box-footer clearfix">
          
           <div class="btn-group">
-          <button class="btn btn-primary btn-flat pull-right" ng-click="add()" type="button" >Next</button>
+          <button class="btn btn-primary btn-flat pull-right" ng-click="add()" type="button" >Finish</button>
           </div>
           </div>
         </div>
@@ -215,3 +215,18 @@
 
   </script>
  
+        <script>
+$("#date").inputmask("99/99/9999");
+$("#phone").inputmask("(9) 999-999-9999");
+$("#phone").on("blur", function() {
+    var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+    if( last.length == 3 ) {
+        var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
+        var lastfour = move + last;
+        
+        var first = $(this).val().substr( 0, 9 );
+        
+        $(this).val( first + '-' + lastfour );
+    }
+});
+</script>

@@ -107,7 +107,7 @@ class Elections extends REST_Controller{
         $data['election_date'] = $filter->election_date;
         $data['duration'] = $filter->duration;
         $data['created_by'] = $this->aauth->get_user()->name; 
-        $data['date_created'] = date("F j, Y, g:i a", time());
+        $data['date_created'] = $filter->date_created;
         $save = $this->election_model->insert($data, $skip_validate = FALSE);
         if($save){
         $success = $data['title'].' election has been Created';
