@@ -17,12 +17,16 @@ class Ballot extends CI_Controller {
 			$voter_pin = $this->voters_model->get($id);
             $data['voter_id'] = $this->bcrypt->hash($id);
             $data['candidate_id'] = $this->input->post('radio');
-         if($data['pin'] == ""){
+         if($this->input->post('voter_pin') == ""){
         	$error = 'Voter PIN cannot be empty';
 	    	$this->session->set_flashdata('msg', $error);  
          	redirect(base_url(),'refresh');
          }
-         if($data['pin'] != $voter_pin[''])
+         if($this->input->post('voter_pin') != $voter_pin['pin']){
+        	$error = 'Voter PIN authentication failed';
+	    	$this->session->set_flashdata('msg', $error);  
+         	redirect(base_url(),'refresh');
+         }
 	    if($data['candidate_id'] == "") {
         	$error = 'No Canidate was selected';
 	    	$this->session->set_flashdata('msg', $error);    
@@ -33,7 +37,7 @@ class Ballot extends CI_Controller {
         $success = 'Your Vote has been recorded. You will logged out permanently from this system.';
         // $logout = $this->ion_auth->logout();
         $banned = $this->voters_model->delete_by($id, array('id'=>$id));
-        if($banned && $this->ion_auth->logout()){
+        if($vote && $banned && $this->ion_auth->logout()){
 		$this->session->set_flashdata('success', $success);
 		redirect(base_url(), 'refresh');
 			}

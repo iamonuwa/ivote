@@ -107,6 +107,15 @@ myApp.controller('dashboardCtrl', function ($scope, $http) {
                 $scope.CurrentUser = data;
             })
     }
+    $scope.updateData = function (old, new_password, confirm) {
+        $http.put(BASE_URL + "dashboard/reset/" +  old + "/" + new_password + "/" + confirm)
+        .success(function (message) {
+            toastr.success(message)
+        })
+        .error(function (message) {
+            toastr.warning(message)
+        })
+    }
 });
 
 //Accounts Controller
@@ -286,7 +295,8 @@ myApp.controller('voterCtrl', function ($scope, $http, $route) {
                 'phone' : $scope.phone,
                 'occupation' : $scope.occupation,
                 'name' : randomString(7, "N"),
-                'picture' : $scope.picture
+                'picture' : $scope.picture,
+                'pin' : randomString(10, "N")
             }
         )
         .success(function (message) {

@@ -91,6 +91,7 @@ class Voters extends REST_Controller{
         $occupation = $data->occupation;
         $picture = $data->picture;
         $email = '';
+        $pin = $data->pin;
         $pass = generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds');
         $name = $data->name;
 
@@ -102,7 +103,8 @@ class Voters extends REST_Controller{
             'gender'=> $gender,
             'phone'=> $phone,
             'occupation'=>$occupation,
-            'picture'=>$picture
+            'picture'=>$picture,
+            'pin'=> $pin
             );
         if(empty($data->surname)){
             $error = 'Surnname is required';

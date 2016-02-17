@@ -86,7 +86,7 @@
 							<div class="team-member">
 							<br>
 							<label for="pin" class="label-control">Enter your voter pin:</label>
-							<input type="text" class="form-control" name="voter-pin" placeholder="Enter Voter PIN" required>
+							<input type="text" class="form-control" name="voter_pin" placeholder="Enter Voter PIN" required>
 							</div>
 							</div>
 							</div>
@@ -104,10 +104,7 @@
 
 				<?php 
 				?>
-	<?php
-	$test = $this->voters_model->get('15');
-	 var_dump($test['firstname']);?>
-
+	
 			</section>
 
 			<script>

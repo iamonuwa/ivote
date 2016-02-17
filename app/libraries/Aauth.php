@@ -848,6 +848,29 @@ class Aauth {
 		return $this->aauth_db->update($this->config_vars['users'], $data);
 	}
 
+		public function update_pass($user_id , $pass) {
+
+		$valid = TRUE;
+
+		$data = array();
+		$valid = TRUE;
+
+		if ($pass) {
+			if ( strlen($pass) < $this->config_vars['min'] OR strlen($pass) > $this->config_vars['max'] ){
+				$this->error($this->CI->lang->line('aauth_error_password_invalid'));
+				$valid = FALSE;
+			}
+			$data['pass'] = $this->hash_password($pass, $user_id, 'login');
+		}
+
+		if (!$valid) {
+			return FALSE; 
+		}
+
+		$this->aauth_db->where('id', $user_id);
+		return $this->aauth_db->update($this->config_vars['users'], $data);
+	}
+
 	//tested
 	/**
 	 * List users

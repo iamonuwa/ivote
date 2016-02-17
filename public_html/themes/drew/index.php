@@ -82,7 +82,7 @@
 												<div class="col-md-10 col-md-offset-1">
 										<div class="hero-heading text-center" data-animation="fadeIn">
 
-										<h1 class="hero-title">This is INEC iVoter System</h1>
+										<h1 class="hero-title">This is iVoter System</h1>
 
 										<p class="hero-tagline">If you are seeing this, there is currently no election running</p>
 
